@@ -1,4 +1,5 @@
 // Copyright (c) 2013-2016 The btcsuite developers
+// Copyright (c) 2016 The Dash developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
@@ -7,9 +8,9 @@ package blockchain
 import (
 	"fmt"
 
-	"github.com/btcsuite/btcd/database"
-	"github.com/btcsuite/btcd/wire"
-	"github.com/btcsuite/btcutil"
+	"github.com/dashpay/godash/database"
+	"github.com/dashpay/godash/wire"
+	"github.com/dashpay/godashutil"
 )
 
 // BehaviorFlags is a bitmask defining tweaks to the normal behavior when
@@ -125,7 +126,7 @@ func (b *BlockChain) processOrphans(hash *wire.ShaHash, flags BehaviorFlags) err
 // when the error is nil.
 //
 // This function is safe for concurrent access.
-func (b *BlockChain) ProcessBlock(block *btcutil.Block, flags BehaviorFlags) (bool, error) {
+func (b *BlockChain) ProcessBlock(block *godashutil.Block, flags BehaviorFlags) (bool, error) {
 	b.chainLock.Lock()
 	defer b.chainLock.Unlock()
 

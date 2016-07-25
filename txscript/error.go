@@ -1,4 +1,5 @@
 // Copyright (c) 2013-2015 The btcsuite developers
+// Copyright (c) 2016 The Dash developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
@@ -145,7 +146,7 @@ var (
 	ErrInvalidIndex = errors.New("invalid input index")
 
 	// ErrUnsupportedAddress is returned when a concrete type that
-	// implements a btcutil.Address is not a supported type.
+	// implements a godashutil.Address is not a supported type.
 	ErrUnsupportedAddress = errors.New("unsupported address type")
 
 	// ErrBadNumRequired is returned from MultiSigScript when nrequired is

@@ -1,4 +1,5 @@
 // Copyright (c) 2015 The btcsuite developers
+// Copyright (c) 2016 The Dash developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
@@ -10,7 +11,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/btcsuite/btcd/btcjson"
+	"github.com/dashpay/godash/btcjson"
 )
 
 // helpDescsEnUS defines the English descriptions used for the help strings.

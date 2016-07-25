@@ -1,6 +1,7 @@
 // Copyright 2011 The Go Authors. All rights reserved.
 // Copyright 2011 ThePiachu. All rights reserved.
 // Copyright 2013-2014 The btcsuite developers
+// Copyright (c) 2016 The Dash developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
@@ -14,7 +15,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/btcsuite/btcd/btcec"
+	"github.com/dashpay/godash/btcec"
 )
 
 // TestAddJacobian tests addition of points projected in Jacobian coordinates.

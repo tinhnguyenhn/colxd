@@ -1,4 +1,5 @@
 // Copyright (c) 2015 The btcsuite developers
+// Copyright (c) 2016 The Dash developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
@@ -8,8 +9,8 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/btcsuite/btcd/btcec"
-	"github.com/btcsuite/btcd/wire"
+	"github.com/dashpay/godash/btcec"
+	"github.com/dashpay/godash/wire"
 )
 
 // genRandomSig returns a random message, a signature of the message under the

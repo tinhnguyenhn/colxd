@@ -3,8 +3,8 @@ updated: 2016-05-06T10:10:16.348595-05:00
 imports:
 - name: github.com/btcsuite/btclog
   version: f96df2375f37300305f329b8e5258764b4f19a7f
-- name: github.com/btcsuite/btcutil
-  version: 2c26dd81a59fd671a2218d63ad138a6dd4d693bd
+- name: github.com/dashpay/godashutil
+  version: 2187ca894b87133a0a14228d6a3d5450b0eb0553
   subpackages:
   - .
   - bloom

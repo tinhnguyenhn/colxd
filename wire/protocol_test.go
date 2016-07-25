@@ -1,4 +1,5 @@
 // Copyright (c) 2013-2015 The btcsuite developers
+// Copyright (c) 2016 The Dash developers
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
 
@@ -7,7 +8,7 @@ package wire_test
 import (
 	"testing"
 
-	"github.com/btcsuite/btcd/wire"
+	"github.com/dashpay/godash/wire"
 )
 
 // TestServiceFlagStringer tests the stringized output for service flag types.

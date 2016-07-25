@@ -1,4 +1,5 @@
 // Copyright (c) 2013-2014 The btcsuite developers
+// Copyright (c) 2016 The Dash developers
 // Copyright (c) 2013-2014 Dave Collins
 // Use of this source code is governed by an ISC
 // license that can be found in the LICENSE file.
@@ -9,7 +10,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/btcsuite/btcd/btcec"
+	"github.com/dashpay/godash/btcec"
 )
 
 // TestSetInt ensures that setting a field value to various native integers
