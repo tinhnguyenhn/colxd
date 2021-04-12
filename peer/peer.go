@@ -19,10 +19,10 @@ import (
 	"time"
 
 	"github.com/btcsuite/go-socks/socks"
-	"github.com/dashpay/godash/blockchain"
-	"github.com/dashpay/godash/chaincfg"
-	"github.com/dashpay/godash/wire"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/tinhnguyenhn/colxd/blockchain"
+	"github.com/tinhnguyenhn/colxd/chaincfg"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 const (

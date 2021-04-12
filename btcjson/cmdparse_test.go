@@ -11,7 +11,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/dashpay/godash/btcjson"
+	"github.com/tinhnguyenhn/colxd/btcjson"
 )
 
 // TestAssignField tests the assignField function handles supported combinations

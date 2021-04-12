@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"hash/crc32"
 
-	"github.com/dashpay/godash/database"
+	"github.com/tinhnguyenhn/colxd/database"
 )
 
 // The serialized write cursor location format is:

@@ -6,8 +6,8 @@
 package main
 
 import (
-	"github.com/dashpay/godash/chaincfg"
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/chaincfg"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // activeNetParams is a pointer to the parameters specific to the

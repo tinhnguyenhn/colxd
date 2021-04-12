@@ -11,7 +11,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // TestFilterAddLatest tests the MsgFilterAdd API against the latest protocol

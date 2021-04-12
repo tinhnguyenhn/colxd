@@ -1,11 +1,11 @@
 mining
 ======
 
-[![Build Status](http://img.shields.io/travis/dashpay/godash.svg)]
-(https://travis-ci.org/dashpay/godash) [![ISC License]
+[![Build Status](http://img.shields.io/travis/tinhnguyenhn/colxd.svg)]
+(https://travis-ci.org/tinhnguyenhn/colxd) [![ISC License]
 (http://img.shields.io/badge/license-ISC-blue.svg)](http://copyfree.org)
 [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg)]
-(http://godoc.org/github.com/dashpay/godash/mining)
+(http://godoc.org/github.com/tinhnguyenhn/colxd/mining)
 
 ## Overview
 
@@ -14,7 +14,7 @@ This package is currently a work in progress.
 ## Installation and Updating
 
 ```bash
-$ go get -u github.com/dashpay/godash/mining
+$ go get -u github.com/tinhnguyenhn/colxd/mining
 ```
 
 ## License

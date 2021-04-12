@@ -1,11 +1,11 @@
 chaincfg
 ========
 
-[![Build Status](http://img.shields.io/travis/dashpay/godash.svg)]
-(https://travis-ci.org/dashpay/godash) [![ISC License]
+[![Build Status](http://img.shields.io/travis/tinhnguyenhn/colxd.svg)]
+(https://travis-ci.org/tinhnguyenhn/colxd) [![ISC License]
 (http://img.shields.io/badge/license-ISC-blue.svg)](http://copyfree.org)
 [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg)]
-(http://godoc.org/github.com/dashpay/godash/chaincfg)
+(http://godoc.org/github.com/tinhnguyenhn/colxd/chaincfg)
 
 Package chaincfg defines chain configuration parameters for the three standard
 Bitcoin networks and provides the ability for callers to define their own custom
@@ -26,8 +26,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/dashpay/godashutil"
-	"github.com/dashpay/godash/chaincfg"
+	"github.com/tinhnguyenhn/colxutil"
+	"github.com/tinhnguyenhn/colxd/chaincfg"
 )
 
 var testnet = flag.Bool("testnet", false, "operate on the testnet Bitcoin network")
@@ -58,7 +58,7 @@ func main() {
 ## Installation and Updating
 
 ```bash
-$ go get -u github.com/dashpay/godash/chaincfg
+$ go get -u github.com/tinhnguyenhn/colxd/chaincfg
 ```
 
 ## GPG Verification Key

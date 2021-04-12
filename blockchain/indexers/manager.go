@@ -9,10 +9,9 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/dashpay/godash/blockchain"
-	"github.com/dashpay/godash/database"
-	"github.com/dashpay/godash/wire"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxd/blockchain"
+	"github.com/tinhnguyenhn/colxd/database"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 var (

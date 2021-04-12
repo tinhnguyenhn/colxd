@@ -11,7 +11,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/dashpay/godash/database"
+	"github.com/tinhnguyenhn/colxd/database"
 )
 
 // TestSetLogWriter ensures the

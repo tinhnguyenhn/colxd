@@ -8,8 +8,7 @@ package blockchain_test
 import (
 	"testing"
 
-	"github.com/dashpay/godash/blockchain"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxd/blockchain"
 )
 
 // BenchmarkIsCoinBase performs a simple benchmark against the IsCoinBase

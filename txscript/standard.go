@@ -6,8 +6,7 @@
 package txscript
 
 import (
-	"github.com/dashpay/godash/chaincfg"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxd/chaincfg"
 )
 
 const (
@@ -348,6 +347,17 @@ func PayToAddrScript(addr godashutil.Address) ([]byte, error) {
 	}
 
 	return nil, ErrUnsupportedAddress
+}
+
+// NullDataScript creates a provably-prunable script containing OP_RETURN
+// followed by the passed data.  An Error with the error code ErrTooMuchNullData
+// will be returned if the length of the passed data exceeds MaxDataCarrierSize.
+func NullDataScript(data []byte) ([]byte, error) {
+	if len(data) > MaxDataCarrierSize {
+		return nil, ErrTooMuchNullData
+	}
+
+	return NewScriptBuilder().AddOp(OP_RETURN).AddData(data).Script()
 }
 
 // MultiSigScript returns a valid script for a multisignature redemption where

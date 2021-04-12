@@ -10,8 +10,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/dashpay/godash/wire"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // TestSendHeaders tests the MsgSendHeaders API against the latest protocol

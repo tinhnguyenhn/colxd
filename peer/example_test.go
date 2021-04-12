@@ -10,9 +10,9 @@ import (
 	"net"
 	"time"
 
-	"github.com/dashpay/godash/chaincfg"
-	"github.com/dashpay/godash/peer"
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/chaincfg"
+	"github.com/tinhnguyenhn/colxd/peer"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // mockRemotePeer creates a basic inbound peer listening on the simnet port for

@@ -11,10 +11,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dashpay/godash/blockchain"
-	"github.com/dashpay/godash/chaincfg"
-	"github.com/dashpay/godash/wire"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxd/blockchain"
+	"github.com/tinhnguyenhn/colxd/chaincfg"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // TestCheckConnectBlock tests the CheckConnectBlock function to ensure it

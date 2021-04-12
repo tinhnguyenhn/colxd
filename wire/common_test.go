@@ -13,8 +13,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/dashpay/godash/wire"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // mainNetGenesisHash is the hash of the first block in the block chain for the

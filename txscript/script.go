@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // Bip16Activation is the timestamp where BIP0016 is valid to use in the
@@ -263,6 +263,17 @@ func removeOpcodeByData(pkscript []parsedOpcode, data []byte) []parsedOpcode {
 	}
 	return retScript
 
+}
+
+// CalcSignatureHash will, given a script and hash type for the current script
+// engine instance, calculate the signature hash to be used for signing and
+// verification.
+func CalcSignatureHash(script []byte, hashType SigHashType, tx *wire.MsgTx, idx int) ([]byte, error) {
+	parsedScript, err := parseScript(script)
+	if err != nil {
+		return nil, fmt.Errorf("cannot parse output script: %v", err)
+	}
+	return calcSignatureHash(parsedScript, hashType, tx, idx), nil
 }
 
 // calcSignatureHash will, given a script and hash type for the current script

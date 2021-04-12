@@ -12,7 +12,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/dashpay/godash/btcjson"
+	"github.com/tinhnguyenhn/colxd/btcjson"
 )
 
 // TestWalletSvrCmds tests all of the wallet server commands marshal and

@@ -22,10 +22,9 @@ import (
 	"github.com/btcsuite/goleveldb/leveldb/iterator"
 	"github.com/btcsuite/goleveldb/leveldb/opt"
 	"github.com/btcsuite/goleveldb/leveldb/util"
-	"github.com/dashpay/godash/database"
-	"github.com/dashpay/godash/database/internal/treap"
-	"github.com/dashpay/godash/wire"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxd/database"
+	"github.com/tinhnguyenhn/colxd/database/internal/treap"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 const (

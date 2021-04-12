@@ -1,11 +1,11 @@
 btcjson
 =======
 
-[![Build Status](https://travis-ci.org/dashpay/godash.png?branch=master)]
-(https://travis-ci.org/dashpay/godash) [![ISC License]
+[![Build Status](https://travis-ci.org/tinhnguyenhn/colxd.png?branch=master)]
+(https://travis-ci.org/tinhnguyenhn/colxd) [![ISC License]
 (http://img.shields.io/badge/license-ISC-blue.svg)](http://copyfree.org)
 [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg)]
-(http://godoc.org/github.com/dashpay/godash/btcjson)
+(http://godoc.org/github.com/tinhnguyenhn/colxd/btcjson)
 
 Package btcjson implements concrete types for marshalling to and from the
 bitcoin JSON-RPC API.  A comprehensive suite of tests is provided to ensure
@@ -27,26 +27,26 @@ ints, etc) to higher-level types with many nice and useful properties.
 ## Installation and Updating
 
 ```bash
-$ go get -u github.com/dashpay/godash/btcjson
+$ go get -u github.com/tinhnguyenhn/colxd/btcjson
 ```
 
 ## Examples
 
 * [Marshal Command]
-  (http://godoc.org/github.com/dashpay/godash/btcjson#example-MarshalCmd)  
+  (http://godoc.org/github.com/tinhnguyenhn/colxd/btcjson#example-MarshalCmd)  
   Demonstrates how to create and marshal a command into a JSON-RPC request.
 
 * [Unmarshal Command]
-  (http://godoc.org/github.com/dashpay/godash/btcjson#example-UnmarshalCmd)  
+  (http://godoc.org/github.com/tinhnguyenhn/colxd/btcjson#example-UnmarshalCmd)  
   Demonstrates how to unmarshal a JSON-RPC request and then unmarshal the
   concrete request into a concrete command.
 
 * [Marshal Response]
-  (http://godoc.org/github.com/dashpay/godash/btcjson#example-MarshalResponse)  
+  (http://godoc.org/github.com/tinhnguyenhn/colxd/btcjson#example-MarshalResponse)  
   Demonstrates how to marshal a JSON-RPC response.
 
 * [Unmarshal Response]
-  (http://godoc.org/github.com/dashpay/godash/btcjson#example-package--UnmarshalResponse)  
+  (http://godoc.org/github.com/tinhnguyenhn/colxd/btcjson#example-package--UnmarshalResponse)  
   Demonstrates how to unmarshal a JSON-RPC response and then unmarshal the
   result field in the response to a concrete type.
 

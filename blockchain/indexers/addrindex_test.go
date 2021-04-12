@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // addrIndexBucket provides a mock address index database bucket by implementing

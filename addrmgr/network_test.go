@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dashpay/godash/addrmgr"
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/addrmgr"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // TestIPTypes ensures the various functions which determine the type of an IP

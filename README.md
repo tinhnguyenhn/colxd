@@ -1,8 +1,8 @@
 btcd
 ====
 
-[![Build Status](https://travis-ci.org/dashpay/godash.png?branch=master)]
-(https://travis-ci.org/dashpay/godash)
+[![Build Status](https://travis-ci.org/tinhnguyenhn/colxd.png?branch=master)]
+(https://travis-ci.org/tinhnguyenhn/colxd)
 
 btcd is an alternative full node bitcoin implementation written in Go (golang).
 
@@ -39,7 +39,7 @@ which are both under active development.
 
 #### Windows - MSI Available
 
-https://github.com/dashpay/godash/releases
+https://github.com/tinhnguyenhn/colxd/releases
 
 #### Linux/BSD/MacOSX/POSIX - Build from Source
 
@@ -66,8 +66,8 @@ This step is not required for Go 1.6.
 
 ```bash
 $ go get -u github.com/Masterminds/glide
-$ git clone https://github.com/dashpay/godash $GOPATH/src/github.com/dashpay/godash
-$ cd $GOPATH/src/github.com/dashpay/godash
+$ git clone https://github.com/tinhnguyenhn/colxd $GOPATH/src/github.com/tinhnguyenhn/colxd
+$ cd $GOPATH/src/github.com/tinhnguyenhn/colxd
 $ glide install
 $ go install . ./cmd/...
 ```
@@ -87,7 +87,7 @@ Install a newer MSI
 - Run the following commands to update btcd, all dependencies, and install it:
 
 ```bash
-$ cd $GOPATH/src/github.com/dashpay/godash
+$ cd $GOPATH/src/github.com/tinhnguyenhn/colxd
 $ git pull && glide install
 $ go install . ./cmd/...
 ```
@@ -123,12 +123,12 @@ To subscribe to a given list, send email to list+subscribe@opensource.conformal.
 
 ## Issue Tracker
 
-The [integrated github issue tracker](https://github.com/dashpay/godash/issues)
+The [integrated github issue tracker](https://github.com/tinhnguyenhn/colxd/issues)
 is used for this project.
 
 ## Documentation
 
-The documentation is a work-in-progress.  It is located in the [docs](https://github.com/dashpay/godash/tree/master/docs) folder.
+The documentation is a work-in-progress.  It is located in the [docs](https://github.com/tinhnguyenhn/colxd/tree/master/docs) folder.
 
 ## GPG Verification Key
 

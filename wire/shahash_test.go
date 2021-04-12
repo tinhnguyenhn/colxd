@@ -10,7 +10,7 @@ import (
 	"encoding/hex"
 	"testing"
 
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // TestShaHash tests the ShaHash API.

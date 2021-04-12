@@ -14,9 +14,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/dashpay/godash/blockchain"
-	"github.com/dashpay/godash/wire"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxd/blockchain"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // TestReorganization loads a set of test blocks which force a chain

@@ -9,7 +9,7 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // These variables are the chain proof-of-work limit parameters for each default

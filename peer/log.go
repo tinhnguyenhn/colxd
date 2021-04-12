@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"github.com/btcsuite/btclog"
-	"github.com/dashpay/godash/txscript"
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/txscript"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 const (

@@ -991,7 +991,7 @@ package main
 
 import (
 	"github.com/btcsuite/btcrpcclient"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxutil"
 	"io/ioutil"
 	"log"
 	"path/filepath"
@@ -1051,8 +1051,8 @@ package main
 
 import (
 	"github.com/btcsuite/btcrpcclient"
-	"github.com/dashpay/godashutil"
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxutil"
+	"github.com/tinhnguyenhn/colxd/wire"
 	"io/ioutil"
 	"log"
 	"path/filepath"
@@ -1141,8 +1141,8 @@ package main
 
 import (
 	"github.com/btcsuite/btcrpcclient"
-	"github.com/dashpay/godashutil"
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxutil"
+	"github.com/tinhnguyenhn/colxd/wire"
 	"io/ioutil"
 	"log"
 	"path/filepath"

@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 var (

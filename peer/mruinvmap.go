@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // mruInventoryMap provides a concurrency safe map that is limited to a maximum

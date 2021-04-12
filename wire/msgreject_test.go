@@ -11,8 +11,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/dashpay/godash/wire"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // TestRejectCodeStringer tests the stringized output for the reject code type.

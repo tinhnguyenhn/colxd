@@ -6,8 +6,8 @@
 package blockchain
 
 import (
-	"github.com/dashpay/godash/database"
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/database"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // BlockLocator is used to help locate a specific block.  The algorithm for

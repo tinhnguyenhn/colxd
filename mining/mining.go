@@ -8,8 +8,7 @@ package mining
 import (
 	"time"
 
-	"github.com/dashpay/godash/wire"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // TxDesc is a descriptor about a transaction in a transaction source along with

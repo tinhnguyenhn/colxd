@@ -8,10 +8,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/dashpay/godash/blockchain"
-	"github.com/dashpay/godash/txscript"
-	"github.com/dashpay/godash/wire"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxd/blockchain"
+	"github.com/tinhnguyenhn/colxd/txscript"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 const (

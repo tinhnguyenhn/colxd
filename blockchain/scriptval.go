@@ -10,9 +10,8 @@ import (
 	"math"
 	"runtime"
 
-	"github.com/dashpay/godash/txscript"
-	"github.com/dashpay/godash/wire"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxd/txscript"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // txValidateItem holds a transaction along with which input to validate.

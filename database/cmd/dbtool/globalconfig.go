@@ -11,11 +11,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/dashpay/godash/chaincfg"
-	"github.com/dashpay/godash/database"
-	_ "github.com/dashpay/godash/database/ffldb"
-	"github.com/dashpay/godash/wire"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxd/chaincfg"
+	"github.com/tinhnguyenhn/colxd/database"
+	_ "github.com/tinhnguyenhn/colxd/database/ffldb"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 var (

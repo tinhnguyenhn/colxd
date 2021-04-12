@@ -10,8 +10,8 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/dashpay/godash/blockchain"
-	"github.com/dashpay/godash/txscript"
+	"github.com/tinhnguyenhn/colxd/blockchain"
+	"github.com/tinhnguyenhn/colxd/txscript"
 )
 
 // TestCheckBlockScripts ensures that validating the all of the scripts in a

@@ -15,8 +15,8 @@ import (
 
 	"github.com/btcsuite/fastsha256"
 	"github.com/btcsuite/golangcrypto/ripemd160"
-	"github.com/dashpay/godash/btcec"
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/btcec"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // An opcode defines the information related to a txscript opcode.  opfunc, if

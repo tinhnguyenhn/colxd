@@ -11,12 +11,12 @@ import (
 
 	"github.com/btcsuite/btclog"
 	"github.com/btcsuite/seelog"
-	"github.com/dashpay/godash/addrmgr"
-	"github.com/dashpay/godash/blockchain"
-	"github.com/dashpay/godash/blockchain/indexers"
-	"github.com/dashpay/godash/database"
-	"github.com/dashpay/godash/peer"
-	"github.com/dashpay/godash/txscript"
+	"github.com/tinhnguyenhn/colxd/addrmgr"
+	"github.com/tinhnguyenhn/colxd/blockchain"
+	"github.com/tinhnguyenhn/colxd/blockchain/indexers"
+	"github.com/tinhnguyenhn/colxd/database"
+	"github.com/tinhnguyenhn/colxd/peer"
+	"github.com/tinhnguyenhn/colxd/txscript"
 )
 
 const (

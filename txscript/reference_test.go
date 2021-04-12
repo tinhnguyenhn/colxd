@@ -16,9 +16,8 @@ import (
 	"strings"
 	"testing"
 
-	. "github.com/dashpay/godash/txscript"
-	"github.com/dashpay/godash/wire"
-	"github.com/dashpay/godashutil"
+	. "github.com/tinhnguyenhn/colxd/txscript"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // testName returns a descriptive test name for the given reference test data.

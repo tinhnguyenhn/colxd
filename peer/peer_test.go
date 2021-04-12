@@ -14,9 +14,9 @@ import (
 	"time"
 
 	"github.com/btcsuite/go-socks/socks"
-	"github.com/dashpay/godash/chaincfg"
-	"github.com/dashpay/godash/peer"
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/chaincfg"
+	"github.com/tinhnguyenhn/colxd/peer"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // conn mocks a network connection by implementing the net.Conn interface.  It

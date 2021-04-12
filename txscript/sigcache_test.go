@@ -9,8 +9,8 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/dashpay/godash/btcec"
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/btcec"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // genRandomSig returns a random message, a signature of the message under the

@@ -14,7 +14,7 @@ import (
 	"testing"
 
 	"github.com/btcsuite/fastsha256"
-	"github.com/dashpay/godash/btcec"
+	"github.com/tinhnguyenhn/colxd/btcec"
 )
 
 type signatureTest struct {

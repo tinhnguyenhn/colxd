@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dashpay/godash/wire"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // TestBlockHeader tests the BlockHeader API.

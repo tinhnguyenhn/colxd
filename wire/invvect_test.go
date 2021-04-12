@@ -10,8 +10,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/dashpay/godash/wire"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // TestInvVectStringer tests the stringized output for inventory vector types.

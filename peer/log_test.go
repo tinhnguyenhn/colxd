@@ -10,7 +10,7 @@ import (
 	"io"
 	"testing"
 
-	"github.com/dashpay/godash/peer"
+	"github.com/tinhnguyenhn/colxd/peer"
 )
 
 func TestSetLogWriter(t *testing.T) {

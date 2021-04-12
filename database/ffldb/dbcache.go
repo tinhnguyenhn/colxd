@@ -14,7 +14,7 @@ import (
 	"github.com/btcsuite/goleveldb/leveldb"
 	"github.com/btcsuite/goleveldb/leveldb/iterator"
 	"github.com/btcsuite/goleveldb/leveldb/util"
-	"github.com/dashpay/godash/database/internal/treap"
+	"github.com/tinhnguyenhn/colxd/database/internal/treap"
 )
 
 const (

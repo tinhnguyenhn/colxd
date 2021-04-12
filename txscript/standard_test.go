@@ -11,9 +11,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/dashpay/godash/chaincfg"
-	"github.com/dashpay/godash/txscript"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxd/chaincfg"
+	"github.com/tinhnguyenhn/colxd/txscript"
 )
 
 // decodeHex decodes the passed hex string and returns the resulting bytes.  It

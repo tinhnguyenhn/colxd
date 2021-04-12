@@ -14,8 +14,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dashpay/godash/wire"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // makeHeader is a convenience function to make a message header in the form of

@@ -8,10 +8,9 @@ package blockchain
 import (
 	"fmt"
 
-	"github.com/dashpay/godash/database"
-	"github.com/dashpay/godash/txscript"
-	"github.com/dashpay/godash/wire"
-	"github.com/dashpay/godashutil"
+	"github.com/tinhnguyenhn/colxd/database"
+	"github.com/tinhnguyenhn/colxd/txscript"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // utxoOutput houses details about an individual unspent transaction output such

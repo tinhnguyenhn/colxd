@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dashpay/godash/wire"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // TestBlock tests the MsgBlock API.

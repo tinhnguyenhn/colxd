@@ -11,7 +11,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/dashpay/godash/btcjson"
+	"github.com/tinhnguyenhn/colxd/btcjson"
 )
 
 // helpDescsEnUS defines the English descriptions used for the help strings.

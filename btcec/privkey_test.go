@@ -9,7 +9,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/dashpay/godash/btcec"
+	"github.com/tinhnguyenhn/colxd/btcec"
 )
 
 func TestPrivKeys(t *testing.T) {

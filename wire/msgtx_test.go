@@ -12,8 +12,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/dashpay/godash/wire"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // TestTx tests the MsgTx API.

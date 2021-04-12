@@ -18,7 +18,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/dashpay/godash/btcec"
+	"github.com/tinhnguyenhn/colxd/btcec"
 )
 
 func main() {

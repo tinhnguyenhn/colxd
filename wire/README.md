@@ -1,11 +1,11 @@
 wire
 ====
 
-[![Build Status](http://img.shields.io/travis/dashpay/godash.svg)]
-(https://travis-ci.org/dashpay/godash) [![ISC License]
+[![Build Status](http://img.shields.io/travis/tinhnguyenhn/colxd.svg)]
+(https://travis-ci.org/tinhnguyenhn/colxd) [![ISC License]
 (http://img.shields.io/badge/license-ISC-blue.svg)](http://copyfree.org)
 [![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg)]
-(http://godoc.org/github.com/dashpay/godash/wire)
+(http://godoc.org/github.com/tinhnguyenhn/colxd/wire)
 
 Package wire implements the bitcoin wire protocol.  A comprehensive suite of
 tests with 100% test coverage is provided to ensure proper functionality.
@@ -20,7 +20,7 @@ protocol level.
 ## Installation and Updating
 
 ```bash
-$ go get -u github.com/dashpay/godash/wire
+$ go get -u github.com/tinhnguyenhn/colxd/wire
 ```
 
 ## Bitcoin Message Overview

@@ -11,8 +11,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/dashpay/godash/database"
-	"github.com/dashpay/godash/wire"
+	"github.com/tinhnguyenhn/colxd/database"
+	"github.com/tinhnguyenhn/colxd/wire"
 )
 
 // blockRegionCmd defines the configuration options for the fetchblockregion
