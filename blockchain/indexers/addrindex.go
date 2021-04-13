@@ -514,21 +514,21 @@ func dbRemoveAddrIndexEntries(bucket internalBucket, addrKey [addrKeySize]byte, 
 
 // addrToKey converts known address types to an addrindex key.  An error is
 // returned for unsupported types.
-func addrToKey(addr godashutil.Address) ([addrKeySize]byte, error) {
+func addrToKey(addr colxutil.Address) ([addrKeySize]byte, error) {
 	switch addr := addr.(type) {
-	case *godashutil.AddressPubKeyHash:
+	case *colxutil.AddressPubKeyHash:
 		var result [addrKeySize]byte
 		result[0] = addrKeyTypePubKeyHash
 		copy(result[1:], addr.Hash160()[:])
 		return result, nil
 
-	case *godashutil.AddressScriptHash:
+	case *colxutil.AddressScriptHash:
 		var result [addrKeySize]byte
 		result[0] = addrKeyTypeScriptHash
 		copy(result[1:], addr.Hash160()[:])
 		return result, nil
 
-	case *godashutil.AddressPubKey:
+	case *colxutil.AddressPubKey:
 		var result [addrKeySize]byte
 		result[0] = addrKeyTypePubKeyHash
 		copy(result[1:], addr.AddressPubKeyHash().Hash160()[:])
@@ -568,7 +568,7 @@ type AddrIndex struct {
 	// This allows fairly efficient updates when transactions are removed
 	// once they are included into a block.
 	unconfirmedLock sync.RWMutex
-	txnsByAddr      map[[addrKeySize]byte]map[wire.ShaHash]*godashutil.Tx
+	txnsByAddr      map[[addrKeySize]byte]map[wire.ShaHash]*colxutil.Tx
 	addrsByTx       map[wire.ShaHash]map[[addrKeySize]byte]struct{}
 }
 
@@ -661,7 +661,7 @@ func (idx *AddrIndex) indexPkScript(data writeIndexData, pkScript []byte, txIdx 
 // indexBlock extract all of the standard addresses from all of the transactions
 // in the passed block and maps each of them to the assocaited transaction using
 // the passed map.
-func (idx *AddrIndex) indexBlock(data writeIndexData, block *godashutil.Block, view *blockchain.UtxoViewpoint) {
+func (idx *AddrIndex) indexBlock(data writeIndexData, block *colxutil.Block, view *blockchain.UtxoViewpoint) {
 	for txIdx, tx := range block.Transactions() {
 		// Coinbases do not reference any inputs.  Since the block is
 		// required to have already gone through full validation, it has
@@ -694,7 +694,7 @@ func (idx *AddrIndex) indexBlock(data writeIndexData, block *godashutil.Block, v
 // the transactions in the block involve.
 //
 // This is part of the Indexer interface.
-func (idx *AddrIndex) ConnectBlock(dbTx database.Tx, block *godashutil.Block, view *blockchain.UtxoViewpoint) error {
+func (idx *AddrIndex) ConnectBlock(dbTx database.Tx, block *colxutil.Block, view *blockchain.UtxoViewpoint) error {
 	// The offset and length of the transactions within the serialized
 	// block.
 	txLocs, err := block.TxLoc()
@@ -732,7 +732,7 @@ func (idx *AddrIndex) ConnectBlock(dbTx database.Tx, block *godashutil.Block, vi
 // each transaction in the block involve.
 //
 // This is part of the Indexer interface.
-func (idx *AddrIndex) DisconnectBlock(dbTx database.Tx, block *godashutil.Block, view *blockchain.UtxoViewpoint) error {
+func (idx *AddrIndex) DisconnectBlock(dbTx database.Tx, block *colxutil.Block, view *blockchain.UtxoViewpoint) error {
 	// Build all of the address to transaction mappings in a local map.
 	addrsToTxns := make(writeIndexData)
 	idx.indexBlock(addrsToTxns, block, view)
@@ -760,7 +760,7 @@ func (idx *AddrIndex) DisconnectBlock(dbTx database.Tx, block *godashutil.Block,
 // that involve a given address.
 //
 // This function is safe for concurrent access.
-func (idx *AddrIndex) TxRegionsForAddress(dbTx database.Tx, addr godashutil.Address, numToSkip, numRequested uint32, reverse bool) ([]database.BlockRegion, uint32, error) {
+func (idx *AddrIndex) TxRegionsForAddress(dbTx database.Tx, addr colxutil.Address, numToSkip, numRequested uint32, reverse bool) ([]database.BlockRegion, uint32, error) {
 	addrKey, err := addrToKey(addr)
 	if err != nil {
 		return nil, 0, err
@@ -792,7 +792,7 @@ func (idx *AddrIndex) TxRegionsForAddress(dbTx database.Tx, addr godashutil.Addr
 // script to the transaction.
 //
 // This function is safe for concurrent access.
-func (idx *AddrIndex) indexUnconfirmedAddresses(pkScript []byte, tx *godashutil.Tx) {
+func (idx *AddrIndex) indexUnconfirmedAddresses(pkScript []byte, tx *colxutil.Tx) {
 	// The error is ignored here since the only reason it can fail is if the
 	// script fails to parse and it was already validated before being
 	// admitted to the mempool.
@@ -809,7 +809,7 @@ func (idx *AddrIndex) indexUnconfirmedAddresses(pkScript []byte, tx *godashutil.
 		idx.unconfirmedLock.Lock()
 		addrIndexEntry := idx.txnsByAddr[addrKey]
 		if addrIndexEntry == nil {
-			addrIndexEntry = make(map[wire.ShaHash]*godashutil.Tx)
+			addrIndexEntry = make(map[wire.ShaHash]*colxutil.Tx)
 			idx.txnsByAddr[addrKey] = addrIndexEntry
 		}
 		addrIndexEntry[*tx.Sha()] = tx
@@ -834,7 +834,7 @@ func (idx *AddrIndex) indexUnconfirmedAddresses(pkScript []byte, tx *godashutil.
 // addresses not being indexed.
 //
 // This function is safe for concurrent access.
-func (idx *AddrIndex) AddUnconfirmedTx(tx *godashutil.Tx, utxoView *blockchain.UtxoViewpoint) {
+func (idx *AddrIndex) AddUnconfirmedTx(tx *colxutil.Tx, utxoView *blockchain.UtxoViewpoint) {
 	// Index addresses of all referenced previous transaction outputs.
 	//
 	// The existence checks are elided since this is only called after the
@@ -885,7 +885,7 @@ func (idx *AddrIndex) RemoveUnconfirmedTx(hash *wire.ShaHash) {
 // Unsupported address types are ignored and will result in no results.
 //
 // This function is safe for concurrent access.
-func (idx *AddrIndex) UnconfirmedTxnsForAddress(addr godashutil.Address) []*godashutil.Tx {
+func (idx *AddrIndex) UnconfirmedTxnsForAddress(addr colxutil.Address) []*colxutil.Tx {
 	// Ignore unsupported address types.
 	addrKey, err := addrToKey(addr)
 	if err != nil {
@@ -899,7 +899,7 @@ func (idx *AddrIndex) UnconfirmedTxnsForAddress(addr godashutil.Address) []*goda
 	// Return a new slice with the results if there are any.  This ensures
 	// safe concurrency.
 	if txns, exists := idx.txnsByAddr[addrKey]; exists {
-		addressTxns := make([]*godashutil.Tx, 0, len(txns))
+		addressTxns := make([]*colxutil.Tx, 0, len(txns))
 		for _, tx := range txns {
 			addressTxns = append(addressTxns, tx)
 		}
@@ -920,7 +920,7 @@ func NewAddrIndex(db database.DB, chainParams *chaincfg.Params) *AddrIndex {
 	return &AddrIndex{
 		db:          db,
 		chainParams: chainParams,
-		txnsByAddr:  make(map[[addrKeySize]byte]map[wire.ShaHash]*godashutil.Tx),
+		txnsByAddr:  make(map[[addrKeySize]byte]map[wire.ShaHash]*colxutil.Tx),
 		addrsByTx:   make(map[wire.ShaHash]map[[addrKeySize]byte]struct{}),
 	}
 }

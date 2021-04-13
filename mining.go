@@ -28,7 +28,7 @@ const (
 
 	// minHighPriority is the minimum priority value that allows a
 	// transaction to be considered high priority.
-	minHighPriority = godashutil.SatoshiPerBitcoin * 144.0 / 250
+	minHighPriority = colxutil.SatoshiPerBitcoin * 144.0 / 250
 
 	// blockHeaderOverhead is the max number of bytes it takes to serialize
 	// a block header and max possible transaction count.
@@ -44,7 +44,7 @@ const (
 // transaction to be prioritized and track dependencies on other transactions
 // which have not been mined into a block yet.
 type txPrioItem struct {
-	tx       *godashutil.Tx
+	tx       *colxutil.Tx
 	fee      int64
 	priority float64
 	feePerKB int64
@@ -212,7 +212,7 @@ func standardCoinbaseScript(nextBlockHeight int32, extraNonce uint64) ([]byte, e
 //
 // See the comment for NewBlockTemplate for more information about why the nil
 // address handling is useful.
-func createCoinbaseTx(coinbaseScript []byte, nextBlockHeight int32, addr godashutil.Address) (*godashutil.Tx, error) {
+func createCoinbaseTx(coinbaseScript []byte, nextBlockHeight int32, addr colxutil.Address) (*colxutil.Tx, error) {
 	// Create the script to pay to the provided payment address if one was
 	// specified.  Otherwise create a script that allows the coinbase to be
 	// redeemable by anyone.
@@ -246,13 +246,13 @@ func createCoinbaseTx(coinbaseScript []byte, nextBlockHeight int32, addr godashu
 			activeNetParams.Params),
 		PkScript: pkScript,
 	})
-	return godashutil.NewTx(tx), nil
+	return colxutil.NewTx(tx), nil
 }
 
 // spendTransaction updates the passed view by marking the inputs to the passed
 // transaction as spent.  It also adds all outputs in the passed transaction
 // which are not provably unspendable as available unspent transaction outputs.
-func spendTransaction(utxoView *blockchain.UtxoViewpoint, tx *godashutil.Tx, height int32) error {
+func spendTransaction(utxoView *blockchain.UtxoViewpoint, tx *colxutil.Tx, height int32) error {
 	for _, txIn := range tx.MsgTx().TxIn {
 		originHash := &txIn.PreviousOutPoint.Hash
 		originIndex := txIn.PreviousOutPoint.Index
@@ -268,7 +268,7 @@ func spendTransaction(utxoView *blockchain.UtxoViewpoint, tx *godashutil.Tx, hei
 
 // logSkippedDeps logs any dependencies which are also skipped as a result of
 // skipping a transaction while generating a block template at the trace level.
-func logSkippedDeps(tx *godashutil.Tx, deps *list.List) {
+func logSkippedDeps(tx *colxutil.Tx, deps *list.List) {
 	if deps == nil {
 		return
 	}
@@ -381,7 +381,7 @@ func medianAdjustedTime(chainState *chainState, timeSource blockchain.MedianTime
 //  |  transactions (while block size   |   |
 //  |  <= policy.BlockMinSize)          |   |
 //   -----------------------------------  --
-func NewBlockTemplate(policy *mining.Policy, server *server, payToAddress godashutil.Address) (*BlockTemplate, error) {
+func NewBlockTemplate(policy *mining.Policy, server *server, payToAddress colxutil.Address) (*BlockTemplate, error) {
 	var txSource mining.TxSource = server.txMemPool
 	blockManager := server.blockManager
 	timeSource := server.timeSource
@@ -427,7 +427,7 @@ func NewBlockTemplate(policy *mining.Policy, server *server, payToAddress godash
 	// generated block with reserved space.  Also create a utxo view to
 	// house all of the input transactions so multiple lookups can be
 	// avoided.
-	blockTxns := make([]*godashutil.Tx, 0, len(sourceTxns))
+	blockTxns := make([]*colxutil.Tx, 0, len(sourceTxns))
 	blockTxns = append(blockTxns, coinbaseTx)
 	blockUtxos := blockchain.NewUtxoViewpoint()
 
@@ -741,7 +741,7 @@ mempoolLoop:
 	// Finally, perform a full check on the created block against the chain
 	// consensus rules to ensure it properly connects to the current best
 	// chain with no issues.
-	block := godashutil.NewBlock(&msgBlock)
+	block := colxutil.NewBlock(&msgBlock)
 	block.SetHeight(nextBlockHeight)
 	if err := blockManager.chain.CheckConnectBlock(block); err != nil {
 		return nil, err
@@ -809,12 +809,12 @@ func UpdateExtraNonce(msgBlock *wire.MsgBlock, blockHeight int32, extraNonce uin
 	}
 	msgBlock.Transactions[0].TxIn[0].SignatureScript = coinbaseScript
 
-	// TODO(davec): A godashutil.Block should use saved in the state to avoid
+	// TODO(davec): A colxutil.Block should use saved in the state to avoid
 	// recalculating all of the other transaction hashes.
 	// block.Transactions[0].InvalidateCache()
 
 	// Recalculate the merkle root with the updated extra nonce.
-	block := godashutil.NewBlock(msgBlock)
+	block := colxutil.NewBlock(msgBlock)
 	merkles := blockchain.BuildMerkleTreeStore(block.Transactions())
 	msgBlock.Header.MerkleRoot = *merkles[len(merkles)-1]
 	return nil

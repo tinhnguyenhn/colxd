@@ -66,7 +66,7 @@ func HashMerkleBranches(left *wire.ShaHash, right *wire.ShaHash) *wire.ShaHash {
 // are calculated by concatenating the left node with itself before hashing.
 // Since this function uses nodes that are pointers to the hashes, empty nodes
 // will be nil.
-func BuildMerkleTreeStore(transactions []*godashutil.Tx) []*wire.ShaHash {
+func BuildMerkleTreeStore(transactions []*colxutil.Tx) []*wire.ShaHash {
 	// Calculate how many entries are required to hold the binary merkle
 	// tree as a linear array and create an array of that size.
 	nextPoT := nextPowerOfTwo(len(transactions))

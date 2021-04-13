@@ -43,7 +43,7 @@ const (
 
 	// baseSubsidy is the starting subsidy amount for mined blocks.  This
 	// value is halved every SubsidyHalvingInterval blocks.
-	baseSubsidy = 50 * godashutil.SatoshiPerBitcoin
+	baseSubsidy = 50 * colxutil.SatoshiPerBitcoin
 
 	// CoinbaseMaturity is the number of blocks required before newly
 	// mined bitcoins (coinbase transactions) can be spent.
@@ -122,12 +122,12 @@ func IsCoinBaseTx(msgTx *wire.MsgTx) bool {
 //
 // This function only differs from IsCoinBaseTx in that it works with a higher
 // level util transaction as opposed to a raw wire transaction.
-func IsCoinBase(tx *godashutil.Tx) bool {
+func IsCoinBase(tx *colxutil.Tx) bool {
 	return IsCoinBaseTx(tx.MsgTx())
 }
 
 // IsFinalizedTransaction determines whether or not a transaction is finalized.
-func IsFinalizedTransaction(tx *godashutil.Tx, blockHeight int32, blockTime time.Time) bool {
+func IsFinalizedTransaction(tx *colxutil.Tx, blockHeight int32, blockTime time.Time) bool {
 	msgTx := tx.MsgTx()
 
 	// Lock time of zero means the transaction is finalized.
@@ -197,7 +197,7 @@ func CalcBlockSubsidy(height int32, chainParams *chaincfg.Params) int64 {
 
 // CheckTransactionSanity performs some preliminary checks on a transaction to
 // ensure it is sane.  These checks are context free.
-func CheckTransactionSanity(tx *godashutil.Tx) error {
+func CheckTransactionSanity(tx *colxutil.Tx) error {
 	// A transaction must have at least one input.
 	msgTx := tx.MsgTx()
 	if len(msgTx.TxIn) == 0 {
@@ -232,10 +232,10 @@ func CheckTransactionSanity(tx *godashutil.Tx) error {
 				"value of %v", satoshi)
 			return ruleError(ErrBadTxOutValue, str)
 		}
-		if satoshi > godashutil.MaxSatoshi {
+		if satoshi > colxutil.MaxSatoshi {
 			str := fmt.Sprintf("transaction output value of %v is "+
 				"higher than max allowed value of %v", satoshi,
-				godashutil.MaxSatoshi)
+				colxutil.MaxSatoshi)
 			return ruleError(ErrBadTxOutValue, str)
 		}
 
@@ -246,14 +246,14 @@ func CheckTransactionSanity(tx *godashutil.Tx) error {
 		if totalSatoshi < 0 {
 			str := fmt.Sprintf("total value of all transaction "+
 				"outputs exceeds max allowed value of %v",
-				godashutil.MaxSatoshi)
+				colxutil.MaxSatoshi)
 			return ruleError(ErrBadTxOutValue, str)
 		}
-		if totalSatoshi > godashutil.MaxSatoshi {
+		if totalSatoshi > colxutil.MaxSatoshi {
 			str := fmt.Sprintf("total value of all transaction "+
 				"outputs is %v which is higher than max "+
 				"allowed value of %v", totalSatoshi,
-				godashutil.MaxSatoshi)
+				colxutil.MaxSatoshi)
 			return ruleError(ErrBadTxOutValue, str)
 		}
 	}
@@ -335,7 +335,7 @@ func checkProofOfWork(header *wire.BlockHeader, powLimit *big.Int, flags Behavio
 // CheckProofOfWork ensures the block header bits which indicate the target
 // difficulty is in min/max range and that the block hash is less than the
 // target difficulty as claimed.
-func CheckProofOfWork(block *godashutil.Block, powLimit *big.Int) error {
+func CheckProofOfWork(block *colxutil.Block, powLimit *big.Int) error {
 	return checkProofOfWork(&block.MsgBlock().Header, powLimit, BFNone)
 }
 
@@ -343,7 +343,7 @@ func CheckProofOfWork(block *godashutil.Block, powLimit *big.Int) error {
 // input and output scripts in the provided transaction.  This uses the
 // quicker, but imprecise, signature operation counting mechanism from
 // txscript.
-func CountSigOps(tx *godashutil.Tx) int {
+func CountSigOps(tx *colxutil.Tx) int {
 	msgTx := tx.MsgTx()
 
 	// Accumulate the number of signature operations in all transaction
@@ -368,7 +368,7 @@ func CountSigOps(tx *godashutil.Tx) int {
 // transactions which are of the pay-to-script-hash type.  This uses the
 // precise, signature operation counting mechanism from the script engine which
 // requires access to the input transaction scripts.
-func CountP2SHSigOps(tx *godashutil.Tx, isCoinBaseTx bool, utxoView *UtxoViewpoint) (int, error) {
+func CountP2SHSigOps(tx *colxutil.Tx, isCoinBaseTx bool, utxoView *UtxoViewpoint) (int, error) {
 	// Coinbase transactions have no interesting inputs.
 	if isCoinBaseTx {
 		return 0, nil
@@ -461,7 +461,7 @@ func checkBlockHeaderSanity(header *wire.BlockHeader, powLimit *big.Int, timeSou
 //
 // The flags do not modify the behavior of this function directly, however they
 // are needed to pass along to checkBlockHeaderSanity.
-func checkBlockSanity(block *godashutil.Block, powLimit *big.Int, timeSource MedianTimeSource, flags BehaviorFlags) error {
+func checkBlockSanity(block *colxutil.Block, powLimit *big.Int, timeSource MedianTimeSource, flags BehaviorFlags) error {
 	msgBlock := block.MsgBlock()
 	header := &msgBlock.Header
 	err := checkBlockHeaderSanity(header, powLimit, timeSource, flags)
@@ -567,14 +567,14 @@ func checkBlockSanity(block *godashutil.Block, powLimit *big.Int, timeSource Med
 
 // CheckBlockSanity performs some preliminary checks on a block to ensure it is
 // sane before continuing with block processing.  These checks are context free.
-func CheckBlockSanity(block *godashutil.Block, powLimit *big.Int, timeSource MedianTimeSource) error {
+func CheckBlockSanity(block *colxutil.Block, powLimit *big.Int, timeSource MedianTimeSource) error {
 	return checkBlockSanity(block, powLimit, timeSource, BFNone)
 }
 
 // ExtractCoinbaseHeight attempts to extract the height of the block from the
 // scriptSig of a coinbase transaction.  Coinbase heights are only present in
 // blocks of version 2 or later.  This was added as part of BIP0034.
-func ExtractCoinbaseHeight(coinbaseTx *godashutil.Tx) (int32, error) {
+func ExtractCoinbaseHeight(coinbaseTx *colxutil.Tx) (int32, error) {
 	sigScript := coinbaseTx.MsgTx().TxIn[0].SignatureScript
 	if len(sigScript) < 1 {
 		str := "the coinbase signature script for blocks of " +
@@ -602,7 +602,7 @@ func ExtractCoinbaseHeight(coinbaseTx *godashutil.Tx) (int32, error) {
 
 // checkSerializedHeight checks if the signature script in the passed
 // transaction starts with the serialized block height of wantHeight.
-func checkSerializedHeight(coinbaseTx *godashutil.Tx, wantHeight int32) error {
+func checkSerializedHeight(coinbaseTx *colxutil.Tx, wantHeight int32) error {
 	serializedHeight, err := ExtractCoinbaseHeight(coinbaseTx)
 	if err != nil {
 		return err
@@ -735,7 +735,7 @@ func (b *BlockChain) checkBlockHeaderContext(header *wire.BlockHeader, prevNode 
 // for how the flags modify its behavior.
 //
 // This function MUST be called with the chain state lock held (for writes).
-func (b *BlockChain) checkBlockContext(block *godashutil.Block, prevNode *blockNode, flags BehaviorFlags) error {
+func (b *BlockChain) checkBlockContext(block *colxutil.Block, prevNode *blockNode, flags BehaviorFlags) error {
 	// The genesis block is valid by definition.
 	if prevNode == nil {
 		return nil
@@ -794,7 +794,7 @@ func (b *BlockChain) checkBlockContext(block *godashutil.Block, prevNode *blockN
 // http://r6.ca/blog/20120206T005236Z.html.
 //
 // This function MUST be called with the chain state lock held (for reads).
-func (b *BlockChain) checkBIP0030(node *blockNode, block *godashutil.Block, view *UtxoViewpoint) error {
+func (b *BlockChain) checkBIP0030(node *blockNode, block *colxutil.Block, view *UtxoViewpoint) error {
 	// Fetch utxo details for all of the transactions in this block.
 	// Typically, there will not be any utxos for any of the transactions.
 	fetchSet := make(map[wire.ShaHash]struct{})
@@ -832,7 +832,7 @@ func (b *BlockChain) checkBIP0030(node *blockNode, block *godashutil.Block, view
 //
 // NOTE: The transaction MUST have already been sanity checked with the
 // CheckTransactionSanity function prior to calling this function.
-func CheckTransactionInputs(tx *godashutil.Tx, txHeight int32, utxoView *UtxoViewpoint) (int64, error) {
+func CheckTransactionInputs(tx *colxutil.Tx, txHeight int32, utxoView *UtxoViewpoint) (int64, error) {
 	// Coinbase transactions have no inputs.
 	if IsCoinBase(tx) {
 		return 0, nil
@@ -885,14 +885,14 @@ func CheckTransactionInputs(tx *godashutil.Tx, txHeight int32, utxoView *UtxoVie
 		originTxSatoshi := utxoEntry.AmountByIndex(originTxIndex)
 		if originTxSatoshi < 0 {
 			str := fmt.Sprintf("transaction output has negative "+
-				"value of %v", godashutil.Amount(originTxSatoshi))
+				"value of %v", colxutil.Amount(originTxSatoshi))
 			return 0, ruleError(ErrBadTxOutValue, str)
 		}
-		if originTxSatoshi > godashutil.MaxSatoshi {
+		if originTxSatoshi > colxutil.MaxSatoshi {
 			str := fmt.Sprintf("transaction output value of %v is "+
 				"higher than max allowed value of %v",
-				godashutil.Amount(originTxSatoshi),
-				godashutil.MaxSatoshi)
+				colxutil.Amount(originTxSatoshi),
+				colxutil.MaxSatoshi)
 			return 0, ruleError(ErrBadTxOutValue, str)
 		}
 
@@ -902,11 +902,11 @@ func CheckTransactionInputs(tx *godashutil.Tx, txHeight int32, utxoView *UtxoVie
 		lastSatoshiIn := totalSatoshiIn
 		totalSatoshiIn += originTxSatoshi
 		if totalSatoshiIn < lastSatoshiIn ||
-			totalSatoshiIn > godashutil.MaxSatoshi {
+			totalSatoshiIn > colxutil.MaxSatoshi {
 			str := fmt.Sprintf("total value of all transaction "+
 				"inputs is %v which is higher than max "+
 				"allowed value of %v", totalSatoshiIn,
-				godashutil.MaxSatoshi)
+				colxutil.MaxSatoshi)
 			return 0, ruleError(ErrBadTxOutValue, str)
 		}
 	}
@@ -951,7 +951,7 @@ func CheckTransactionInputs(tx *godashutil.Tx, txHeight int32, utxoView *UtxoVie
 // checks performed by this function.
 //
 // This function MUST be called with the chain state lock held (for writes).
-func (b *BlockChain) checkConnectBlock(node *blockNode, block *godashutil.Block, view *UtxoViewpoint, stxos *[]spentTxOut) error {
+func (b *BlockChain) checkConnectBlock(node *blockNode, block *colxutil.Block, view *UtxoViewpoint, stxos *[]spentTxOut) error {
 	// If the side chain blocks end up in the database, a call to
 	// CheckBlockSanity should be done here in case a previous version
 	// allowed a block that is no longer valid.  However, since the
@@ -1166,7 +1166,7 @@ func (b *BlockChain) checkConnectBlock(node *blockNode, block *godashutil.Block,
 // transaction script validation.
 //
 // This function is safe for concurrent access.
-func (b *BlockChain) CheckConnectBlock(block *godashutil.Block) error {
+func (b *BlockChain) CheckConnectBlock(block *colxutil.Block) error {
 	b.chainLock.Lock()
 	defer b.chainLock.Unlock()
 

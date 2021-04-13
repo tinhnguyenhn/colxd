@@ -24,7 +24,7 @@ const (
 )
 
 var (
-	btcdHomeDir     = godashutil.AppDataDir("btcd", false)
+	btcdHomeDir     = colxutil.AppDataDir("btcd", false)
 	defaultDataDir  = filepath.Join(btcdHomeDir, "data")
 	knownDbTypes    = database.SupportedDrivers()
 	activeNetParams = &chaincfg.MainNetParams

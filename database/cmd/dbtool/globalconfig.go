@@ -18,7 +18,7 @@ import (
 )
 
 var (
-	btcdHomeDir     = godashutil.AppDataDir("btcd", false)
+	btcdHomeDir     = colxutil.AppDataDir("btcd", false)
 	knownDbTypes    = database.SupportedDrivers()
 	activeNetParams = &chaincfg.MainNetParams
 

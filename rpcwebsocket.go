@@ -196,7 +196,7 @@ func (m *wsNotificationManager) queueHandler() {
 // NotifyBlockConnected passes a block newly-connected to the best chain
 // to the notification manager for block and transaction notification
 // processing.
-func (m *wsNotificationManager) NotifyBlockConnected(block *godashutil.Block) {
+func (m *wsNotificationManager) NotifyBlockConnected(block *colxutil.Block) {
 	// As NotifyBlockConnected will be called by the block manager
 	// and the RPC server may no longer be running, use a select
 	// statement to unblock enqueuing the notification once the RPC
@@ -209,7 +209,7 @@ func (m *wsNotificationManager) NotifyBlockConnected(block *godashutil.Block) {
 
 // NotifyBlockDisconnected passes a block disconnected from the best chain
 // to the notification manager for block notification processing.
-func (m *wsNotificationManager) NotifyBlockDisconnected(block *godashutil.Block) {
+func (m *wsNotificationManager) NotifyBlockDisconnected(block *colxutil.Block) {
 	// As NotifyBlockDisconnected will be called by the block manager
 	// and the RPC server may no longer be running, use a select
 	// statement to unblock enqueuing the notification once the RPC
@@ -224,7 +224,7 @@ func (m *wsNotificationManager) NotifyBlockDisconnected(block *godashutil.Block)
 // notification manager for transaction notification processing.  If
 // isNew is true, the tx is is a new transaction, rather than one
 // added to the mempool during a reorg.
-func (m *wsNotificationManager) NotifyMempoolTx(tx *godashutil.Tx, isNew bool) {
+func (m *wsNotificationManager) NotifyMempoolTx(tx *colxutil.Tx, isNew bool) {
 	n := &notificationTxAcceptedByMempool{
 		isNew: isNew,
 		tx:    tx,
@@ -241,11 +241,11 @@ func (m *wsNotificationManager) NotifyMempoolTx(tx *godashutil.Tx, isNew bool) {
 }
 
 // Notification types
-type notificationBlockConnected godashutil.Block
-type notificationBlockDisconnected godashutil.Block
+type notificationBlockConnected colxutil.Block
+type notificationBlockDisconnected colxutil.Block
 type notificationTxAcceptedByMempool struct {
 	isNew bool
-	tx    *godashutil.Tx
+	tx    *colxutil.Tx
 }
 
 // Notification control requests
@@ -300,7 +300,7 @@ out:
 			}
 			switch n := n.(type) {
 			case *notificationBlockConnected:
-				block := (*godashutil.Block)(n)
+				block := (*colxutil.Block)(n)
 
 				// Skip iterating through all txs if no
 				// tx notification requests exist.
@@ -318,7 +318,7 @@ out:
 
 			case *notificationBlockDisconnected:
 				m.notifyBlockDisconnected(blockNotifications,
-					(*godashutil.Block)(n))
+					(*colxutil.Block)(n))
 
 			case *notificationTxAcceptedByMempool:
 				if n.isNew && len(txNotifications) != 0 {
@@ -415,7 +415,7 @@ func (m *wsNotificationManager) UnregisterBlockUpdates(wsc *wsClient) {
 // notifyBlockConnected notifies websocket clients that have registered for
 // block updates when a block is connected to the main chain.
 func (*wsNotificationManager) notifyBlockConnected(clients map[chan struct{}]*wsClient,
-	block *godashutil.Block) {
+	block *colxutil.Block) {
 
 	// Notify interested websocket clients about the connected block.
 	ntfn := btcjson.NewBlockConnectedNtfn(block.Sha().String(),
@@ -434,7 +434,7 @@ func (*wsNotificationManager) notifyBlockConnected(clients map[chan struct{}]*ws
 // notifyBlockDisconnected notifies websocket clients that have registered for
 // block updates when a block is disconnected from the main chain (due to a
 // reorganize).
-func (*wsNotificationManager) notifyBlockDisconnected(clients map[chan struct{}]*wsClient, block *godashutil.Block) {
+func (*wsNotificationManager) notifyBlockDisconnected(clients map[chan struct{}]*wsClient, block *colxutil.Block) {
 	// Skip notification creation if no clients have requested block
 	// connected/disconnected notifications.
 	if len(clients) == 0 {
@@ -469,7 +469,7 @@ func (m *wsNotificationManager) UnregisterNewMempoolTxsUpdates(wsc *wsClient) {
 
 // notifyForNewTx notifies websocket clients that have registered for updates
 // when a new transaction is added to the memory pool.
-func (m *wsNotificationManager) notifyForNewTx(clients map[chan struct{}]*wsClient, tx *godashutil.Tx) {
+func (m *wsNotificationManager) notifyForNewTx(clients map[chan struct{}]*wsClient, tx *colxutil.Tx) {
 	txShaStr := tx.Sha().String()
 	mtx := tx.MsgTx()
 
@@ -478,7 +478,7 @@ func (m *wsNotificationManager) notifyForNewTx(clients map[chan struct{}]*wsClie
 		amount += txOut.Value
 	}
 
-	ntfn := btcjson.NewTxAcceptedNtfn(txShaStr, godashutil.Amount(amount).ToBTC())
+	ntfn := btcjson.NewTxAcceptedNtfn(txShaStr, colxutil.Amount(amount).ToBTC())
 	marshalledJSON, err := btcjson.MarshalCmd(nil, ntfn)
 	if err != nil {
 		rpcsLog.Errorf("Failed to marshal tx notification: %s", err.Error())
@@ -586,7 +586,7 @@ func (*wsNotificationManager) removeSpentRequest(ops map[wire.OutPoint]map[chan 
 }
 
 // txHexString returns the serialized transaction encoded in hexadecimal.
-func txHexString(tx *godashutil.Tx) string {
+func txHexString(tx *colxutil.Tx) string {
 	buf := bytes.NewBuffer(make([]byte, 0, tx.MsgTx().SerializeSize()))
 	// Ignore Serialize's error, as writing to a bytes.buffer cannot fail.
 	tx.MsgTx().Serialize(buf)
@@ -595,7 +595,7 @@ func txHexString(tx *godashutil.Tx) string {
 
 // blockDetails creates a BlockDetails struct to include in btcws notifications
 // from a block and a transaction's block index.
-func blockDetails(block *godashutil.Block, txIndex int) *btcjson.BlockDetails {
+func blockDetails(block *colxutil.Block, txIndex int) *btcjson.BlockDetails {
 	if block == nil {
 		return nil
 	}
@@ -609,7 +609,7 @@ func blockDetails(block *godashutil.Block, txIndex int) *btcjson.BlockDetails {
 
 // newRedeemingTxNotification returns a new marshalled redeemingtx notification
 // with the passed parameters.
-func newRedeemingTxNotification(txHex string, index int, block *godashutil.Block) ([]byte, error) {
+func newRedeemingTxNotification(txHex string, index int, block *colxutil.Block) ([]byte, error) {
 	// Create and marshal the notification.
 	ntfn := btcjson.NewRedeemingTxNtfn(txHex, blockDetails(block, index))
 	return btcjson.MarshalCmd(nil, ntfn)
@@ -620,7 +620,7 @@ func newRedeemingTxNotification(txHex string, index int, block *godashutil.Block
 // address.  A spent notification request is automatically registered for
 // the client for each matching output.
 func (m *wsNotificationManager) notifyForTxOuts(ops map[wire.OutPoint]map[chan struct{}]*wsClient,
-	addrs map[string]map[chan struct{}]*wsClient, tx *godashutil.Tx, block *godashutil.Block) {
+	addrs map[string]map[chan struct{}]*wsClient, tx *colxutil.Tx, block *colxutil.Block) {
 
 	// Nothing to do if nobody is listening for address notifications.
 	if len(addrs) == 0 {
@@ -671,7 +671,7 @@ func (m *wsNotificationManager) notifyForTxOuts(ops map[wire.OutPoint]map[chan s
 // notifying websocket clients of outputs spending to a watched address
 // and inputs spending a watched outpoint.
 func (m *wsNotificationManager) notifyForTx(ops map[wire.OutPoint]map[chan struct{}]*wsClient,
-	addrs map[string]map[chan struct{}]*wsClient, tx *godashutil.Tx, block *godashutil.Block) {
+	addrs map[string]map[chan struct{}]*wsClient, tx *colxutil.Tx, block *colxutil.Block) {
 
 	if len(ops) != 0 {
 		m.notifyForTxIns(ops, tx, block)
@@ -686,7 +686,7 @@ func (m *wsNotificationManager) notifyForTx(ops map[wire.OutPoint]map[chan struc
 // spend a watched output.  If block is non-nil, any matching spent
 // requests are removed.
 func (m *wsNotificationManager) notifyForTxIns(ops map[wire.OutPoint]map[chan struct{}]*wsClient,
-	tx *godashutil.Tx, block *godashutil.Block) {
+	tx *colxutil.Tx, block *colxutil.Block) {
 
 	// Nothing to do if nobody is watching outpoints.
 	if len(ops) == 0 {
@@ -1591,7 +1591,7 @@ func handleStopNotifyReceived(wsc *wsClient, icmd interface{}) (interface{}, err
 // properly, the function returns an error. Otherwise, nil is returned.
 func checkAddressValidity(addrs []string) error {
 	for _, addr := range addrs {
-		_, err := godashutil.DecodeAddress(addr, activeNetParams.Params)
+		_, err := colxutil.DecodeAddress(addr, activeNetParams.Params)
 		if err != nil {
 			return &btcjson.RPCError{
 				Code: btcjson.ErrRPCInvalidAddressOrKey,
@@ -1648,7 +1648,7 @@ var ErrRescanReorg = btcjson.RPCError{
 
 // rescanBlock rescans all transactions in a single block.  This is a helper
 // function for handleRescan.
-func rescanBlock(wsc *wsClient, lookups *rescanKeys, blk *godashutil.Block) {
+func rescanBlock(wsc *wsClient, lookups *rescanKeys, blk *colxutil.Block) {
 	for _, tx := range blk.Transactions() {
 		// Hexadecimal representation of this tx.  Only created if
 		// needed, and reused for later notifications if already made.
@@ -1694,17 +1694,17 @@ func rescanBlock(wsc *wsClient, lookups *rescanKeys, blk *godashutil.Block) {
 
 			for _, addr := range addrs {
 				switch a := addr.(type) {
-				case *godashutil.AddressPubKeyHash:
+				case *colxutil.AddressPubKeyHash:
 					if _, ok := lookups.pubKeyHashes[*a.Hash160()]; !ok {
 						continue
 					}
 
-				case *godashutil.AddressScriptHash:
+				case *colxutil.AddressScriptHash:
 					if _, ok := lookups.scriptHashes[*a.Hash160()]; !ok {
 						continue
 					}
 
-				case *godashutil.AddressPubKey:
+				case *colxutil.AddressPubKey:
 					found := false
 					switch sa := a.ScriptAddress(); len(sa) {
 					case 33: // Compressed
@@ -1818,7 +1818,7 @@ func recoverFromReorg(chain *blockchain.BlockChain, minBlock, maxBlock int32,
 
 // descendantBlock returns the appropriate JSON-RPC error if a current block
 // fetched during a reorganize is not a direct child of the parent block hash.
-func descendantBlock(prevHash *wire.ShaHash, curBlock *godashutil.Block) error {
+func descendantBlock(prevHash *wire.ShaHash, curBlock *colxutil.Block) error {
 	curHash := &curBlock.MsgBlock().Header.PrevBlock
 	if !prevHash.IsEqual(curHash) {
 		rpcsLog.Errorf("Stopping rescan for reorged block %v "+
@@ -1874,7 +1874,7 @@ func handleRescan(wsc *wsClient, icmd interface{}) (interface{}, error) {
 	var compressedPubkey [33]byte
 	var uncompressedPubkey [65]byte
 	for _, addrStr := range cmd.Addresses {
-		addr, err := godashutil.DecodeAddress(addrStr, activeNetParams.Params)
+		addr, err := colxutil.DecodeAddress(addrStr, activeNetParams.Params)
 		if err != nil {
 			jsonErr := btcjson.RPCError{
 				Code: btcjson.ErrRPCInvalidAddressOrKey,
@@ -1884,13 +1884,13 @@ func handleRescan(wsc *wsClient, icmd interface{}) (interface{}, error) {
 			return nil, &jsonErr
 		}
 		switch a := addr.(type) {
-		case *godashutil.AddressPubKeyHash:
+		case *colxutil.AddressPubKeyHash:
 			lookups.pubKeyHashes[*a.Hash160()] = struct{}{}
 
-		case *godashutil.AddressScriptHash:
+		case *colxutil.AddressScriptHash:
 			lookups.scriptHashes[*a.Hash160()] = struct{}{}
 
-		case *godashutil.AddressPubKey:
+		case *colxutil.AddressPubKey:
 			pubkeyBytes := a.ScriptAddress()
 			switch len(pubkeyBytes) {
 			case 33: // Compressed
@@ -1951,7 +1951,7 @@ func handleRescan(wsc *wsClient, icmd interface{}) (interface{}, error) {
 
 	// lastBlock and lastBlockHash track the previously-rescanned block.
 	// They equal nil when no previous blocks have been rescanned.
-	var lastBlock *godashutil.Block
+	var lastBlock *colxutil.Block
 	var lastBlockHash *wire.ShaHash
 
 	// A ticker is created to wait at least 10 seconds before notifying the

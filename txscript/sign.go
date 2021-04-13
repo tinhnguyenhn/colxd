@@ -71,7 +71,7 @@ func p2pkSignatureScript(tx *wire.MsgTx, idx int, subScript []byte, hashType Sig
 // the contract (i.e. nrequired signatures are provided).  Since it is arguably
 // legal to not be able to sign any of the outputs, no error is returned.
 func signMultiSig(tx *wire.MsgTx, idx int, subScript []byte, hashType SigHashType,
-	addresses []godashutil.Address, nRequired int, kdb KeyDB) ([]byte, bool) {
+	addresses []colxutil.Address, nRequired int, kdb KeyDB) ([]byte, bool) {
 	// We start with a single OP_FALSE to work around the (now standard)
 	// but in the reference implementation that causes a spurious pop at
 	// the end of OP_CHECKMULTISIG.
@@ -101,7 +101,7 @@ func signMultiSig(tx *wire.MsgTx, idx int, subScript []byte, hashType SigHashTyp
 
 func sign(chainParams *chaincfg.Params, tx *wire.MsgTx, idx int,
 	subScript []byte, hashType SigHashType, kdb KeyDB, sdb ScriptDB) ([]byte,
-	ScriptClass, []godashutil.Address, int, error) {
+	ScriptClass, []colxutil.Address, int, error) {
 
 	class, addresses, nrequired, err := ExtractPkScriptAddrs(subScript,
 		chainParams)
@@ -165,7 +165,7 @@ func sign(chainParams *chaincfg.Params, tx *wire.MsgTx, idx int,
 // function with addresses, class and nrequired that do not match pkScript is
 // an error and results in undefined behaviour.
 func mergeScripts(chainParams *chaincfg.Params, tx *wire.MsgTx, idx int,
-	pkScript []byte, class ScriptClass, addresses []godashutil.Address,
+	pkScript []byte, class ScriptClass, addresses []colxutil.Address,
 	nRequired int, sigScript, prevScript []byte) []byte {
 
 	// TODO(oga) the scripthash and multisig paths here are overly
@@ -231,7 +231,7 @@ func mergeScripts(chainParams *chaincfg.Params, tx *wire.MsgTx, idx int,
 // pkScript. Since this function is internal only we assume that the arguments
 // have come from other functions internally and thus are all consistent with
 // each other, behaviour is undefined if this contract is broken.
-func mergeMultiSig(tx *wire.MsgTx, idx int, addresses []godashutil.Address,
+func mergeMultiSig(tx *wire.MsgTx, idx int, addresses []colxutil.Address,
 	nRequired int, pkScript, sigScript, prevScript []byte) []byte {
 
 	// This is an internal only function and we already parsed this script
@@ -297,7 +297,7 @@ sigLoop:
 			// All multisig addresses should be pubkey addreses
 			// it is an error to call this internal function with
 			// bad input.
-			pkaddr := addr.(*godashutil.AddressPubKey)
+			pkaddr := addr.(*colxutil.AddressPubKey)
 
 			pubKey := pkaddr.PubKey()
 
@@ -343,14 +343,14 @@ sigLoop:
 // KeyDB is an interface type provided to SignTxOutput, it encapsulates
 // any user state required to get the private keys for an address.
 type KeyDB interface {
-	GetKey(godashutil.Address) (*btcec.PrivateKey, bool, error)
+	GetKey(colxutil.Address) (*btcec.PrivateKey, bool, error)
 }
 
 // KeyClosure implements KeyDB with a closure.
-type KeyClosure func(godashutil.Address) (*btcec.PrivateKey, bool, error)
+type KeyClosure func(colxutil.Address) (*btcec.PrivateKey, bool, error)
 
 // GetKey implements KeyDB by returning the result of calling the closure.
-func (kc KeyClosure) GetKey(address godashutil.Address) (*btcec.PrivateKey,
+func (kc KeyClosure) GetKey(address colxutil.Address) (*btcec.PrivateKey,
 	bool, error) {
 	return kc(address)
 }
@@ -358,14 +358,14 @@ func (kc KeyClosure) GetKey(address godashutil.Address) (*btcec.PrivateKey,
 // ScriptDB is an interface type provided to SignTxOutput, it encapsulates any
 // user state required to get the scripts for an pay-to-script-hash address.
 type ScriptDB interface {
-	GetScript(godashutil.Address) ([]byte, error)
+	GetScript(colxutil.Address) ([]byte, error)
 }
 
 // ScriptClosure implements ScriptDB with a closure.
-type ScriptClosure func(godashutil.Address) ([]byte, error)
+type ScriptClosure func(colxutil.Address) ([]byte, error)
 
 // GetScript implements ScriptDB by returning the result of calling the closure.
-func (sc ScriptClosure) GetScript(address godashutil.Address) ([]byte, error) {
+func (sc ScriptClosure) GetScript(address colxutil.Address) ([]byte, error) {
 	return sc(address)
 }
 

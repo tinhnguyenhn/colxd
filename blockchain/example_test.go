@@ -58,7 +58,7 @@ func ExampleBlockChain_ProcessBlock() {
 	// Process a block.  For this example, we are going to intentionally
 	// cause an error by trying to process the genesis block which already
 	// exists.
-	genesisBlock := godashutil.NewBlock(chaincfg.MainNetParams.GenesisBlock)
+	genesisBlock := colxutil.NewBlock(chaincfg.MainNetParams.GenesisBlock)
 	isOrphan, err := chain.ProcessBlock(genesisBlock, blockchain.BFNone)
 	if err != nil {
 		fmt.Printf("Failed to process block: %v\n", err)

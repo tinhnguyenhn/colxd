@@ -18,7 +18,7 @@ import (
 type txValidateItem struct {
 	txInIndex int
 	txIn      *wire.TxIn
-	tx        *godashutil.Tx
+	tx        *colxutil.Tx
 }
 
 // txValidator provides a type which asynchronously validates transaction
@@ -192,7 +192,7 @@ func newTxValidator(utxoView *UtxoViewpoint, flags txscript.ScriptFlags, sigCach
 
 // ValidateTransactionScripts validates the scripts for the passed transaction
 // using multiple goroutines.
-func ValidateTransactionScripts(tx *godashutil.Tx, utxoView *UtxoViewpoint, flags txscript.ScriptFlags, sigCache *txscript.SigCache) error {
+func ValidateTransactionScripts(tx *colxutil.Tx, utxoView *UtxoViewpoint, flags txscript.ScriptFlags, sigCache *txscript.SigCache) error {
 	// Collect all of the transaction inputs and required information for
 	// validation.
 	txIns := tx.MsgTx().TxIn
@@ -222,7 +222,7 @@ func ValidateTransactionScripts(tx *godashutil.Tx, utxoView *UtxoViewpoint, flag
 
 // checkBlockScripts executes and validates the scripts for all transactions in
 // the passed block using multiple goroutines.
-func checkBlockScripts(block *godashutil.Block, utxoView *UtxoViewpoint, scriptFlags txscript.ScriptFlags, sigCache *txscript.SigCache) error {
+func checkBlockScripts(block *colxutil.Block, utxoView *UtxoViewpoint, scriptFlags txscript.ScriptFlags, sigCache *txscript.SigCache) error {
 	// Collect all of the transaction inputs and required information for
 	// validation for all transactions in the block into a single slice.
 	numInputs := 0

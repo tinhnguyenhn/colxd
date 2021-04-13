@@ -57,7 +57,7 @@ type newPeerMsg struct {
 // blockMsg packages a bitcoin block message and the peer it came from together
 // so the block handler has access to that information.
 type blockMsg struct {
-	block *godashutil.Block
+	block *colxutil.Block
 	peer  *serverPeer
 }
 
@@ -83,7 +83,7 @@ type donePeerMsg struct {
 // txMsg packages a bitcoin tx message and the peer it came from together
 // so the block handler has access to that information.
 type txMsg struct {
-	tx   *godashutil.Tx
+	tx   *colxutil.Tx
 	peer *serverPeer
 }
 
@@ -106,7 +106,7 @@ type processBlockResponse struct {
 // extra handling whereas this message essentially is just a concurrent safe
 // way to call ProcessBlock on the internal block chain instance.
 type processBlockMsg struct {
-	block *godashutil.Block
+	block *colxutil.Block
 	flags blockchain.BehaviorFlags
 	reply chan processBlockResponse
 }
@@ -1181,7 +1181,7 @@ func (b *blockManager) handleNotifyMsg(notification *blockchain.Notification) {
 			return
 		}
 
-		block, ok := notification.Data.(*godashutil.Block)
+		block, ok := notification.Data.(*colxutil.Block)
 		if !ok {
 			bmgrLog.Warnf("Chain accepted notification is not a block.")
 			break
@@ -1193,7 +1193,7 @@ func (b *blockManager) handleNotifyMsg(notification *blockchain.Notification) {
 
 	// A block has been connected to the main block chain.
 	case blockchain.NTBlockConnected:
-		block, ok := notification.Data.(*godashutil.Block)
+		block, ok := notification.Data.(*colxutil.Block)
 		if !ok {
 			bmgrLog.Warnf("Chain connected notification is not a block.")
 			break
@@ -1229,7 +1229,7 @@ func (b *blockManager) handleNotifyMsg(notification *blockchain.Notification) {
 
 	// A block has been disconnected from the main block chain.
 	case blockchain.NTBlockDisconnected:
-		block, ok := notification.Data.(*godashutil.Block)
+		block, ok := notification.Data.(*colxutil.Block)
 		if !ok {
 			bmgrLog.Warnf("Chain disconnected notification is not a block.")
 			break
@@ -1266,7 +1266,7 @@ func (b *blockManager) NewPeer(sp *serverPeer) {
 
 // QueueTx adds the passed transaction message and peer to the block handling
 // queue.
-func (b *blockManager) QueueTx(tx *godashutil.Tx, sp *serverPeer) {
+func (b *blockManager) QueueTx(tx *colxutil.Tx, sp *serverPeer) {
 	// Don't accept more transactions if we're shutting down.
 	if atomic.LoadInt32(&b.shutdown) != 0 {
 		sp.txProcessed <- struct{}{}
@@ -1277,7 +1277,7 @@ func (b *blockManager) QueueTx(tx *godashutil.Tx, sp *serverPeer) {
 }
 
 // QueueBlock adds the passed block message and peer to the block handling queue.
-func (b *blockManager) QueueBlock(block *godashutil.Block, sp *serverPeer) {
+func (b *blockManager) QueueBlock(block *colxutil.Block, sp *serverPeer) {
 	// Don't accept more blocks if we're shutting down.
 	if atomic.LoadInt32(&b.shutdown) != 0 {
 		sp.blockProcessed <- struct{}{}
@@ -1357,7 +1357,7 @@ func (b *blockManager) SyncPeer() *serverPeer {
 // ProcessBlock makes use of ProcessBlock on an internal instance of a block
 // chain.  It is funneled through the block manager since btcchain is not safe
 // for concurrent access.
-func (b *blockManager) ProcessBlock(block *godashutil.Block, flags blockchain.BehaviorFlags) (bool, error) {
+func (b *blockManager) ProcessBlock(block *colxutil.Block, flags blockchain.BehaviorFlags) (bool, error) {
 	reply := make(chan processBlockResponse, 1)
 	b.msgChan <- processBlockMsg{block: block, flags: flags, reply: reply}
 	response := <-reply

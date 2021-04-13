@@ -29,7 +29,7 @@ func TestCheckConnectBlock(t *testing.T) {
 
 	// The genesis block should fail to connect since it's already inserted.
 	genesisBlock := chaincfg.MainNetParams.GenesisBlock
-	err = chain.CheckConnectBlock(godashutil.NewBlock(genesisBlock))
+	err = chain.CheckConnectBlock(colxutil.NewBlock(genesisBlock))
 	if err == nil {
 		t.Errorf("CheckConnectBlock: Did not received expected error")
 	}
@@ -39,7 +39,7 @@ func TestCheckConnectBlock(t *testing.T) {
 // as expected.
 func TestCheckBlockSanity(t *testing.T) {
 	powLimit := chaincfg.MainNetParams.PowLimit
-	block := godashutil.NewBlock(&Block100000)
+	block := colxutil.NewBlock(&Block100000)
 	timeSource := blockchain.NewMedianTime()
 	err := blockchain.CheckBlockSanity(block, powLimit, timeSource)
 	if err != nil {
@@ -101,7 +101,7 @@ func TestCheckSerializedHeight(t *testing.T) {
 	for i, test := range tests {
 		msgTx := coinbaseTx.Copy()
 		msgTx.TxIn[0].SignatureScript = test.sigScript
-		tx := godashutil.NewTx(msgTx)
+		tx := colxutil.NewTx(msgTx)
 
 		err := blockchain.TstCheckSerializedHeight(tx, test.wantHeight)
 		if reflect.TypeOf(err) != reflect.TypeOf(test.err) {

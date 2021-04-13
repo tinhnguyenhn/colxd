@@ -125,7 +125,7 @@ func (b *BlockChain) processOrphans(hash *wire.ShaHash, flags BehaviorFlags) err
 // when the error is nil.
 //
 // This function is safe for concurrent access.
-func (b *BlockChain) ProcessBlock(block *godashutil.Block, flags BehaviorFlags) (bool, error) {
+func (b *BlockChain) ProcessBlock(block *colxutil.Block, flags BehaviorFlags) (bool, error) {
 	b.chainLock.Lock()
 	defer b.chainLock.Unlock()
 

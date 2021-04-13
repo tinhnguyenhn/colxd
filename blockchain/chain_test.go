@@ -23,7 +23,7 @@ func TestHaveBlock(t *testing.T) {
 		"blk_3A.dat.bz2",
 	}
 
-	var blocks []*godashutil.Block
+	var blocks []*colxutil.Block
 	for _, file := range testFiles {
 		blockTmp, err := loadBlocks(file)
 		if err != nil {
@@ -62,7 +62,7 @@ func TestHaveBlock(t *testing.T) {
 	}
 
 	// Insert an orphan block.
-	isOrphan, err := chain.ProcessBlock(godashutil.NewBlock(&Block100000),
+	isOrphan, err := chain.ProcessBlock(colxutil.NewBlock(&Block100000),
 		blockchain.BFNone)
 	if err != nil {
 		t.Errorf("Unable to process block: %v", err)

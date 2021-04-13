@@ -146,7 +146,7 @@ var (
 	ErrInvalidIndex = errors.New("invalid input index")
 
 	// ErrUnsupportedAddress is returned when a concrete type that
-	// implements a godashutil.Address is not a supported type.
+	// implements a colxutil.Address is not a supported type.
 	ErrUnsupportedAddress = errors.New("unsupported address type")
 
 	// ErrBadNumRequired is returned from MultiSigScript when nrequired is

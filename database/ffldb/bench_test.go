@@ -28,7 +28,7 @@ func BenchmarkBlockHeader(b *testing.B) {
 	defer os.RemoveAll(dbPath)
 	defer db.Close()
 	err = db.Update(func(tx database.Tx) error {
-		block := godashutil.NewBlock(chaincfg.MainNetParams.GenesisBlock)
+		block := colxutil.NewBlock(chaincfg.MainNetParams.GenesisBlock)
 		if err := tx.StoreBlock(block); err != nil {
 			return err
 		}
@@ -72,7 +72,7 @@ func BenchmarkBlock(b *testing.B) {
 	defer os.RemoveAll(dbPath)
 	defer db.Close()
 	err = db.Update(func(tx database.Tx) error {
-		block := godashutil.NewBlock(chaincfg.MainNetParams.GenesisBlock)
+		block := colxutil.NewBlock(chaincfg.MainNetParams.GenesisBlock)
 		if err := tx.StoreBlock(block); err != nil {
 			return err
 		}

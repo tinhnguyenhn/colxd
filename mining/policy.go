@@ -24,5 +24,5 @@ type Policy struct {
 	// TxMinFreeFee is the minimum fee in Satoshi/1000 bytes that is
 	// required for a transaction to be treated as free for mining purposes
 	// (block template generation).
-	TxMinFreeFee godashutil.Amount
+	TxMinFreeFee colxutil.Amount
 }

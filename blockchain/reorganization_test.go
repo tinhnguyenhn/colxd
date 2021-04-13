@@ -32,7 +32,7 @@ func TestReorganization(t *testing.T) {
 		"blk_3A.dat.bz2",
 	}
 
-	var blocks []*godashutil.Block
+	var blocks []*colxutil.Block
 	for _, file := range testFiles {
 		blockTmp, err := loadBlocks(file)
 		if err != nil {
@@ -76,8 +76,8 @@ func TestReorganization(t *testing.T) {
 
 // loadBlocks reads files containing bitcoin block data (gzipped but otherwise
 // in the format bitcoind writes) from disk and returns them as an array of
-// godashutil.Block.  This is largely borrowed from the test code in btcdb.
-func loadBlocks(filename string) (blocks []*godashutil.Block, err error) {
+// colxutil.Block.  This is largely borrowed from the test code in btcdb.
+func loadBlocks(filename string) (blocks []*colxutil.Block, err error) {
 	filename = filepath.Join("testdata/", filename)
 
 	var network = wire.MainNet
@@ -96,7 +96,7 @@ func loadBlocks(filename string) (blocks []*godashutil.Block, err error) {
 	}
 	defer fi.Close()
 
-	var block *godashutil.Block
+	var block *colxutil.Block
 
 	err = nil
 	for height := int64(1); err == nil; height++ {
@@ -122,7 +122,7 @@ func loadBlocks(filename string) (blocks []*godashutil.Block, err error) {
 		// read block
 		dr.Read(rbytes)
 
-		block, err = godashutil.NewBlockFromBytes(rbytes)
+		block, err = colxutil.NewBlockFromBytes(rbytes)
 		if err != nil {
 			return
 		}

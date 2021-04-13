@@ -1145,7 +1145,7 @@ func (tx *transaction) hasBlock(hash *wire.ShaHash) bool {
 //   - ErrTxClosed if the transaction has already been closed
 //
 // This function is part of the database.Tx interface implementation.
-func (tx *transaction) StoreBlock(block *godashutil.Block) error {
+func (tx *transaction) StoreBlock(block *colxutil.Block) error {
 	// Ensure transaction state is valid.
 	if err := tx.checkClosed(); err != nil {
 		return err

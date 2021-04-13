@@ -43,7 +43,7 @@ const (
 	// purposes.  It is also used to help determine if a transaction is
 	// considered dust and as a base for calculating minimum required fees
 	// for larger transactions.  This value is in Satoshi/1000 bytes.
-	defaultMinRelayTxFee = godashutil.Amount(1000)
+	defaultMinRelayTxFee = colxutil.Amount(1000)
 
 	// maxStandardMultiSigKeys is the maximum number of public keys allowed
 	// in a multi-signature transaction output script for it to be
@@ -54,7 +54,7 @@ const (
 // calcMinRequiredTxRelayFee returns the minimum transaction fee required for a
 // transaction with the passed serialized size to be accepted into the memory
 // pool and relayed.
-func calcMinRequiredTxRelayFee(serializedSize int64, minRelayTxFee godashutil.Amount) int64 {
+func calcMinRequiredTxRelayFee(serializedSize int64, minRelayTxFee colxutil.Amount) int64 {
 	// Calculate the minimum fee for a transaction to be allowed into the
 	// mempool and relayed by scaling the base fee (which is the minimum
 	// free transaction relay fee).  minTxRelayFee is in Satoshi/kB so
@@ -68,8 +68,8 @@ func calcMinRequiredTxRelayFee(serializedSize int64, minRelayTxFee godashutil.Am
 
 	// Set the minimum fee to the maximum possible value if the calculated
 	// fee is not in the valid range for monetary amounts.
-	if minFee < 0 || minFee > godashutil.MaxSatoshi {
-		minFee = godashutil.MaxSatoshi
+	if minFee < 0 || minFee > colxutil.MaxSatoshi {
+		minFee = colxutil.MaxSatoshi
 	}
 
 	return minFee
@@ -158,7 +158,7 @@ func calcInputValueAge(tx *wire.MsgTx, utxoView *blockchain.UtxoViewpoint, nextB
 // exhaustion attacks by "creative" use of scripts that are super expensive to
 // process like OP_DUP OP_CHECKSIG OP_DROP repeated a large number of times
 // followed by a final OP_TRUE.
-func checkInputsStandard(tx *godashutil.Tx, utxoView *blockchain.UtxoViewpoint) error {
+func checkInputsStandard(tx *colxutil.Tx, utxoView *blockchain.UtxoViewpoint) error {
 	// NOTE: The reference implementation also does a coinbase check here,
 	// but coinbases have already been rejected prior to calling this
 	// function so no need to recheck.
@@ -257,7 +257,7 @@ func checkPkScriptStandard(pkScript []byte, scriptClass txscript.ScriptClass) er
 // Dust is defined in terms of the minimum transaction relay fee.  In
 // particular, if the cost to the network to spend coins is more than 1/3 of the
 // minimum transaction relay fee, it is considered dust.
-func isDust(txOut *wire.TxOut, minRelayTxFee godashutil.Amount) bool {
+func isDust(txOut *wire.TxOut, minRelayTxFee colxutil.Amount) bool {
 	// Unspendable outputs are considered dust.
 	if txscript.IsUnspendable(txOut.PkScript) {
 		return true
@@ -329,7 +329,7 @@ func isDust(txOut *wire.TxOut, minRelayTxFee godashutil.Amount) bool {
 // finalized, conforming to more stringent size constraints, having scripts
 // of recognized forms, and not containing "dust" outputs (those that are
 // so small it costs more to process them than they are worth).
-func checkTransactionStandard(tx *godashutil.Tx, height int32, timeSource blockchain.MedianTimeSource, minRelayTxFee godashutil.Amount) error {
+func checkTransactionStandard(tx *colxutil.Tx, height int32, timeSource blockchain.MedianTimeSource, minRelayTxFee colxutil.Amount) error {
 	// The transaction must be a currently supported version.
 	msgTx := tx.MsgTx()
 	if msgTx.Version > wire.TxVersion || msgTx.Version < 1 {

@@ -13,7 +13,7 @@ import (
 
 // TestMerkle tests the BuildMerkleTreeStore API.
 func TestMerkle(t *testing.T) {
-	block := godashutil.NewBlock(&Block100000)
+	block := colxutil.NewBlock(&Block100000)
 	merkles := blockchain.BuildMerkleTreeStore(block.Transactions())
 	calculatedMerkleRoot := merkles[len(merkles)-1]
 	wantMerkle := &Block100000.Header.MerkleRoot

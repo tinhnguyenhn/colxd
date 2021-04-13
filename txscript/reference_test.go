@@ -369,7 +369,7 @@ testloop:
 			continue
 		}
 
-		tx, err := godashutil.NewTxFromBytes(serializedTx)
+		tx, err := colxutil.NewTxFromBytes(serializedTx)
 		if err != nil {
 			t.Errorf("bad test (arg 2 not msgtx %v) %d: %v", err,
 				i, test)
@@ -511,7 +511,7 @@ testloop:
 			continue
 		}
 
-		tx, err := godashutil.NewTxFromBytes(serializedTx)
+		tx, err := colxutil.NewTxFromBytes(serializedTx)
 		if err != nil {
 			t.Errorf("bad test (arg 2 not msgtx %v) %d: %v", err,
 				i, test)
