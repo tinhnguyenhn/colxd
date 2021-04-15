@@ -10,6 +10,7 @@ package database
 
 import (
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // Cursor represents a cursor over key/value pairs and nested buckets of a

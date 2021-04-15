@@ -16,6 +16,7 @@ import (
 	"github.com/tinhnguyenhn/colxd/blockchain/indexers"
 	"github.com/tinhnguyenhn/colxd/database"
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 var zeroHash = wire.ShaHash{}

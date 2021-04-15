@@ -13,6 +13,7 @@ import (
 
 	"github.com/tinhnguyenhn/colxd/chaincfg"
 	"github.com/tinhnguyenhn/colxd/txscript"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // decodeHex decodes the passed hex string and returns the resulting bytes.  It

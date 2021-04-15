@@ -10,6 +10,7 @@ import (
 
 	"github.com/tinhnguyenhn/colxd/database"
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // BehaviorFlags is a bitmask defining tweaks to the normal behavior when

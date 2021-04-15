@@ -16,6 +16,7 @@ import (
 	"github.com/tinhnguyenhn/colxd/chaincfg"
 	"github.com/tinhnguyenhn/colxd/database"
 	"github.com/tinhnguyenhn/colxd/database/ffldb"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // dbType is the database type name for this driver.

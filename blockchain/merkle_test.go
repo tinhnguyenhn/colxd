@@ -9,6 +9,7 @@ import (
 	"testing"
 
 	"github.com/tinhnguyenhn/colxd/blockchain"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // TestMerkle tests the BuildMerkleTreeStore API.

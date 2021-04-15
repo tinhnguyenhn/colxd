@@ -9,6 +9,7 @@ import (
 	"testing"
 
 	"github.com/tinhnguyenhn/colxd/blockchain"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // BenchmarkIsCoinBase performs a simple benchmark against the IsCoinBase

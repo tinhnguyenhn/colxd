@@ -11,6 +11,7 @@ import (
 	"github.com/tinhnguyenhn/colxd/database"
 	"github.com/tinhnguyenhn/colxd/txscript"
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // utxoOutput houses details about an individual unspent transaction output such

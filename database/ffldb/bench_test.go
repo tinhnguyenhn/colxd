@@ -12,6 +12,7 @@ import (
 
 	"github.com/tinhnguyenhn/colxd/chaincfg"
 	"github.com/tinhnguyenhn/colxd/database"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // BenchmarkBlockHeader benchmarks how long it takes to load the mainnet genesis

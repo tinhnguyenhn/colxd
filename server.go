@@ -30,6 +30,7 @@ import (
 	"github.com/tinhnguyenhn/colxd/peer"
 	"github.com/tinhnguyenhn/colxd/txscript"
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 	"github.com/tinhnguyenhn/colxutil/bloom"
 )
 

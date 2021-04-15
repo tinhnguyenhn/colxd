@@ -5,6 +5,8 @@
 
 package mining
 
+import "github.com/tinhnguyenhn/colxutil"
+
 // Policy houses the policy (configuration parameters) which is used to control
 // the generation of block templates.  See the documentation for
 // NewBlockTemplate for more details on each of these parameters are used.

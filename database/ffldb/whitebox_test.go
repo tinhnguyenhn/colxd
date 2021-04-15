@@ -23,6 +23,7 @@ import (
 	"github.com/tinhnguyenhn/colxd/chaincfg"
 	"github.com/tinhnguyenhn/colxd/database"
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 var (

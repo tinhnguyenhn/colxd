@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // TxDesc is a descriptor about a transaction in a transaction source along with

@@ -16,6 +16,7 @@ import (
 
 	"github.com/tinhnguyenhn/colxd/blockchain"
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // TestReorganization loads a set of test blocks which force a chain

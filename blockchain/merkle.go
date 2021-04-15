@@ -9,6 +9,7 @@ import (
 	"math"
 
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // nextPowerOfTwo returns the next highest power of two from a given number if

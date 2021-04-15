@@ -7,6 +7,7 @@ package txscript
 
 import (
 	"github.com/tinhnguyenhn/colxd/chaincfg"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 const (

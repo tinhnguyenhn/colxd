@@ -14,6 +14,7 @@ import (
 	"github.com/tinhnguyenhn/colxd/blockchain"
 	"github.com/tinhnguyenhn/colxd/chaincfg"
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // TestCheckConnectBlock tests the CheckConnectBlock function to ensure it

@@ -15,6 +15,7 @@ import (
 	"github.com/tinhnguyenhn/colxd/database"
 	_ "github.com/tinhnguyenhn/colxd/database/ffldb"
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 var (

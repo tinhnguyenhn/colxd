@@ -20,6 +20,7 @@ import (
 	"github.com/tinhnguyenhn/colxd/mining"
 	"github.com/tinhnguyenhn/colxd/txscript"
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 const (

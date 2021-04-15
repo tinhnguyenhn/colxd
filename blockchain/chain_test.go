@@ -11,6 +11,7 @@ import (
 	"github.com/tinhnguyenhn/colxd/blockchain"
 	"github.com/tinhnguyenhn/colxd/chaincfg"
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // TestHaveBlock tests the HaveBlock API to ensure proper functionality.

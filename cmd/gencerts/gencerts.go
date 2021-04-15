@@ -14,6 +14,7 @@ import (
 	"time"
 
 	flags "github.com/btcsuite/go-flags"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 type config struct {

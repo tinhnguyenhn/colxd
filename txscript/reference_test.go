@@ -18,6 +18,7 @@ import (
 
 	. "github.com/tinhnguyenhn/colxd/txscript"
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // testName returns a descriptive test name for the given reference test data.

@@ -12,6 +12,7 @@ import (
 	"github.com/tinhnguyenhn/colxd/btcec"
 	"github.com/tinhnguyenhn/colxd/chaincfg"
 	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // RawTxInSignature returns the serialized ECDSA signature for the input idx of

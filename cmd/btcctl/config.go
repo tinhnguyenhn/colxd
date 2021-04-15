@@ -16,6 +16,7 @@ import (
 
 	flags "github.com/btcsuite/go-flags"
 	"github.com/tinhnguyenhn/colxd/btcjson"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 const (

@@ -15,6 +15,7 @@ import (
 	"github.com/tinhnguyenhn/colxd/chaincfg"
 	"github.com/tinhnguyenhn/colxd/database"
 	_ "github.com/tinhnguyenhn/colxd/database/ffldb"
+	"github.com/tinhnguyenhn/colxutil"
 )
 
 // This example demonstrates how to create a new chain instance and use
