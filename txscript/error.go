@@ -152,4 +152,6 @@ var (
 	// ErrBadNumRequired is returned from MultiSigScript when nrequired is
 	// larger than the number of provided public keys.
 	ErrBadNumRequired = errors.New("more signatures required than keys present")
+
+	ErrTooMuchNullData = errors.New("Err Too Much Null Data")
 )
