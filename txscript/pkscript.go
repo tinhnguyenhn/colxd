@@ -7,7 +7,6 @@ import (
 
 	"github.com/tinhnguyenhn/colxd/btcec"
 	"github.com/tinhnguyenhn/colxd/chaincfg"
-	"github.com/tinhnguyenhn/colxd/wire"
 	"github.com/tinhnguyenhn/colxutil"
 	"golang.org/x/crypto/ripemd160"
 )
@@ -20,7 +19,7 @@ const (
 	//   Signature hash type (1 byte)
 	//   Public key length (1 byte)
 	//   Public key (33 byte)
-	minPubKeyHashSigScriptLen = 1 + btcec.MinSigLen + 1 + 1 + 33
+	minPubKeyHashSigScriptLen = 1 + 8 + 1 + 1 + 33
 
 	// maxPubKeyHashSigScriptLen is the maximum length of a signature script
 	// that spends a P2PKH output. The length is composed of the following:
@@ -132,7 +131,7 @@ func (s PkScript) Script() []byte {
 }
 
 // Address encodes the script into an address for the given chain.
-func (s PkScript) Address(chainParams *chaincfg.Params) (btcutil.Address, error) {
+func (s PkScript) Address(chainParams *chaincfg.Params) (colxutil.Address, error) {
 	_, addrs, _, err := ExtractPkScriptAddrs(s.Script(), chainParams)
 	if err != nil {
 		return nil, fmt.Errorf("unable to parse address: %v", err)
