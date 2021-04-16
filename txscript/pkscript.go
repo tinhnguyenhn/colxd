@@ -5,10 +5,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/btcsuite/btcd/btcec"
-	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcd/wire"
-	"github.com/btcsuite/btcutil"
+	"github.com/tinhnguyenhn/colxd/btcec"
+	"github.com/tinhnguyenhn/colxd/chaincfg"
+	"github.com/tinhnguyenhn/colxd/wire"
+	"github.com/tinhnguyenhn/colxutil"
 	"golang.org/x/crypto/ripemd160"
 )
 
@@ -98,8 +98,7 @@ func ParsePkScript(pkScript []byte) (PkScript, error) {
 // PkScript struct.
 func isSupportedScriptType(class ScriptClass) bool {
 	switch class {
-	case PubKeyHashTy, WitnessV0PubKeyHashTy, ScriptHashTy,
-		WitnessV0ScriptHashTy:
+	case PubKeyHashTy, ScriptHashTy:
 		return true
 	default:
 		return false
@@ -120,17 +119,9 @@ func (s PkScript) Script() []byte {
 		script = make([]byte, pubKeyHashLen)
 		copy(script, s.script[:pubKeyHashLen])
 
-	case WitnessV0PubKeyHashTy:
-		script = make([]byte, witnessV0PubKeyHashLen)
-		copy(script, s.script[:witnessV0PubKeyHashLen])
-
 	case ScriptHashTy:
 		script = make([]byte, scriptHashLen)
 		copy(script, s.script[:scriptHashLen])
-
-	case WitnessV0ScriptHashTy:
-		script = make([]byte, witnessV0ScriptHashLen)
-		copy(script, s.script[:witnessV0ScriptHashLen])
 
 	default:
 		// Unsupported script type.
@@ -160,12 +151,10 @@ func (s PkScript) String() string {
 // input's signature script or witness.
 //
 // NOTE: Only P2PKH, P2SH, P2WSH, and P2WPKH redeem scripts are supported.
-func ComputePkScript(sigScript []byte, witness wire.TxWitness) (PkScript, error) {
+func ComputePkScript(sigScript []byte) (PkScript, error) {
 	switch {
 	case len(sigScript) > 0:
 		return computeNonWitnessPkScript(sigScript)
-	case len(witness) > 0:
-		return computeWitnessPkScript(witness)
 	default:
 		return PkScript{}, ErrUnsupportedScriptType
 	}
@@ -227,42 +216,6 @@ func computeNonWitnessPkScript(sigScript []byte) (PkScript, error) {
 		copy(pkScript.script[:], script)
 		return pkScript, nil
 	}
-}
-
-// computeWitnessPkScript computes the script of an output by looking at the
-// spending input's witness.
-func computeWitnessPkScript(witness wire.TxWitness) (PkScript, error) {
-	// We'll use the last item of the witness stack to determine the proper
-	// witness type.
-	lastWitnessItem := witness[len(witness)-1]
-
-	var pkScript PkScript
-	switch {
-	// If the witness stack has a size of 2 and its last item is a
-	// compressed public key, then this is a P2WPKH witness.
-	case len(witness) == 2 && len(lastWitnessItem) == compressedPubKeyLen:
-		pubKeyHash := hash160(lastWitnessItem)
-		script, err := payToWitnessPubKeyHashScript(pubKeyHash)
-		if err != nil {
-			return pkScript, err
-		}
-
-		pkScript.class = WitnessV0PubKeyHashTy
-		copy(pkScript.script[:], script)
-
-	// For any other witnesses, we'll assume it's a P2WSH witness.
-	default:
-		scriptHash := sha256.Sum256(lastWitnessItem)
-		script, err := payToWitnessScriptHashScript(scriptHash[:])
-		if err != nil {
-			return pkScript, err
-		}
-
-		pkScript.class = WitnessV0ScriptHashTy
-		copy(pkScript.script[:], script)
-	}
-
-	return pkScript, nil
 }
 
 // hash160 returns the RIPEMD160 hash of the SHA-256 HASH of the given data.
